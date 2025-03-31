@@ -12,7 +12,1408 @@
   <link href="https://fonts.googleapis.com/css2?family=Charm:wght@400;700&family=Dancing+Script:wght@400;700&family=Josefin+Sans:wght@400;600;700&display=swap" rel="stylesheet">
   <!-- AOS Animation Library -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
- <link rel="stylesheet" href="style.css">
+  <style>
+    :root {
+      --primary-bg: #8B4513;
+      --secondary-bg: #CD853F;
+      --accent-color: #CD7F32;
+      --text-color: #FFF8DC;
+      --gold-color: #D4AF37;
+      --highlight-color: #B22222;
+      --bronze-light: #CD7F32;
+      --bronze-dark: #8B4513;
+      --red-traditional: #C41E3A;
+      --section-padding: 5rem 0;
+      --card-border-radius: 10px;
+      --transition-standard: all 0.3s ease-in-out;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Josefin Sans', sans-serif;
+      background-color: var(--bronze-dark);
+      color: var(--text-color);
+      line-height: 1.6;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Enhanced Bronze Drum Background Pattern */
+    .bronze-drum-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600' viewBox='0 0 600 600'%3E%3Ccircle cx='300' cy='300' r='280' fill='none' stroke='%23CD7F32' stroke-width='3' opacity='0.2'/%3E%3Ccircle cx='300' cy='300' r='240' fill='none' stroke='%23CD7F32' stroke-width='2' opacity='0.2'/%3E%3Ccircle cx='300' cy='300' r='200' fill='none' stroke='%23CD7F32' stroke-width='2' opacity='0.2'/%3E%3Ccircle cx='300' cy='300' r='160' fill='none' stroke='%23CD7F32' stroke-width='2' opacity='0.2'/%3E%3Ccircle cx='300' cy='300' r='120' fill='none' stroke='%23CD7F32' stroke-width='2' opacity='0.2'/%3E%3Cpath d='M300,60 L300,540 M60,300 L540,300 M150,150 L450,450 M150,450 L450,150' stroke='%23CD7F32' stroke-width='2' opacity='0.15'/%3E%3Cpath d='M220,140 C260,100 340,100 380,140 C420,180 420,260 380,300 C340,340 260,340 220,300 C180,260 180,180 220,140 Z' fill='none' stroke='%23CD7F32' stroke-width='2' opacity='0.15' transform='rotate(0 300 300)'/%3E%3Cpath d='M220,140 C260,100 340,100 380,140 C420,180 420,260 380,300 C340,340 260,340 220,300 C180,260 180,180 220,140 Z' fill='none' stroke='%23CD7F32' stroke-width='2' opacity='0.15' transform='rotate(90 300 300)'/%3E%3Cpath d='M300,100 L340,140 L380,100 M300,500 L340,460 L380,500 M100,300 L140,340 L100,380 M500,300 L460,340 L500,380' stroke='%23D4AF37' stroke-width='2' opacity='0.2'/%3E%3Cpath d='M300,180 L300,220 M300,380 L300,420 M180,300 L220,300 M380,300 L420,300' stroke='%23D4AF37' stroke-width='3' opacity='0.2'/%3E%3Ccircle cx='300' cy='300' r='40' fill='none' stroke='%23D4AF37' stroke-width='2' opacity='0.3'/%3E%3C/svg%3E");
+      background-attachment: fixed;
+      z-index: -2;
+      opacity: 0.3;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at center, rgba(139, 69, 19, 0.92) 0%, rgba(139, 69, 19, 0.98) 100%);
+      z-index: -1;
+    }
+
+    /* Decorative Elements */
+    .decorative-element {
+      position: absolute;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .drum-icon-1 {
+      top: 15%;
+      right: 5%;
+      width: 120px;
+      height: 120px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='none' stroke='%23D4AF37' stroke-width='2'/%3E%3Ccircle cx='50' cy='50' r='35' fill='none' stroke='%23D4AF37' stroke-width='1.5'/%3E%3Cpath d='M50,15 L50,85 M15,50 L85,50' stroke='%23D4AF37' stroke-width='1.5' stroke-dasharray='5,3'/%3E%3Cpath d='M30,30 L70,70 M30,70 L70,30' stroke='%23D4AF37' stroke-width='1' stroke-dasharray='3,2'/%3E%3Ccircle cx='50' cy='50' r='5' fill='%23D4AF37'/%3E%3C/svg%3E");
+      opacity: 0.6;
+      animation: float 8s ease-in-out infinite;
+    }
+
+    .drum-icon-2 {
+      bottom: 10%;
+      left: 5%;
+      width: 150px;
+      height: 150px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='none' stroke='%23CD7F32' stroke-width='2'/%3E%3Ccircle cx='50' cy='50' r='35' fill='none' stroke='%23CD7F32' stroke-width='1.5'/%3E%3Ccircle cx='50' cy='50' r='25' fill='none' stroke='%23CD7F32' stroke-width='1'/%3E%3Cpath d='M50,5 L50,95 M5,50 L95,50' stroke='%23CD7F32' stroke-width='1.5'/%3E%3Cpath d='M20,20 L80,80 M20,80 L80,20' stroke='%23CD7F32' stroke-width='1'/%3E%3C/svg%3E");
+      opacity: 0.5;
+      animation: float 10s ease-in-out infinite reverse;
+    }
+
+    .pattern-1 {
+      top: 40%;
+      left: 2%;
+      width: 80px;
+      height: 200px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 120'%3E%3Cpath d='M25,10 L40,30 L25,50 L10,30 Z' fill='none' stroke='%23D4AF37' stroke-width='1'/%3E%3Cpath d='M25,50 L40,70 L25,90 L10,70 Z' fill='none' stroke='%23D4AF37' stroke-width='1'/%3E%3Cpath d='M25,10 L25,90' stroke='%23D4AF37' stroke-width='1' stroke-dasharray='5,3'/%3E%3C/svg%3E");
+      opacity: 0.4;
+      animation: float 15s ease-in-out infinite;
+    }
+
+    .pattern-2 {
+      top: 30%;
+      right: 2%;
+      width: 100px;
+      height: 300px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 180'%3E%3Cpath d='M30,20 C45,20 45,40 30,40 C15,40 15,20 30,20 Z' fill='none' stroke='%23CD7F32' stroke-width='1'/%3E%3Cpath d='M30,60 C45,60 45,80 30,80 C15,80 15,60 30,60 Z' fill='none' stroke='%23CD7F32' stroke-width='1'/%3E%3Cpath d='M30,100 C45,100 45,120 30,120 C15,120 15,100 30,100 Z' fill='none' stroke='%23CD7F32' stroke-width='1'/%3E%3Cpath d='M30,140 C45,140 45,160 30,160 C15,160 15,140 30,140 Z' fill='none' stroke='%23CD7F32' stroke-width='1'/%3E%3Cpath d='M30,20 L30,160' stroke='%23CD7F32' stroke-width='1' stroke-dasharray='5,5'/%3E%3C/svg%3E");
+      opacity: 0.3;
+      animation: float 12s ease-in-out infinite reverse;
+    }
+
+    /* Modern Floating Animation */
+    @keyframes float {
+      0% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-15px) rotate(2deg); }
+      100% { transform: translateY(0) rotate(0deg); }
+    }
+
+    /* Navbar Styling */
+    .navbar {
+  background-color: rgba(139, 69, 19, 0.9);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: var(--transition-standard);
+  padding: 1rem 2rem;
+  border-bottom: 1px solid var(--bronze-light);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.navbar.scrolled {
+  padding: 0.5rem 2rem;
+  background-color: rgba(139, 69, 19, 0.95);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  padding-left: 0;
+}
+
+.navbar-brand img {
+  height: 40px;
+  transition: var(--transition-standard);
+}
+
+.navbar-brand span {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.8rem;
+    color: var(--gold-color) !important;
+    font-weight: 700;
+    margin-left: 10px;
+    transition: var(--transition-standard);
+}
+
+.navbar.scrolled .navbar-brand img {
+  height: 35px;
+}
+
+.navbar.scrolled .navbar-brand span {
+  font-size: 1.6rem;
+}
+
+.navbar-toggler {
+  border: none;
+  color: var(--text-color);
+  padding: 0.25rem 0.5rem;
+  font-size: 1.25rem;
+  background-color: rgba(205, 127, 50, 0.2);
+  border-radius: 4px;
+  transition: var(--transition-standard);
+}
+
+.navbar-toggler:hover {
+  background-color: rgba(205, 127, 50, 0.3);
+}
+
+.navbar-toggler:focus {
+  box-shadow: none;
+  outline: 2px solid var(--gold-color);
+  outline-offset: 2px;
+}
+
+.navbar-nav {
+  margin-left: auto;
+  align-items: center;
+}
+
+.nav-item {
+  position: relative;
+  margin: 0 2px;
+}
+
+.nav-link {
+  color: var(--text-color) !important;
+  font-family: 'Charm', cursive;
+  position: relative;
+  padding: 0.5rem 0.8rem !important;
+  transition: var(--transition-standard);
+  font-size: 1.05rem;
+  font-weight: 500;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background-color: var(--gold-color);
+  transition: var(--transition-standard);
+  transform: translateX(-50%);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 80%;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--gold-color) !important;
+  transform: translateY(-2px);
+}
+
+/* Dropdown styling for navbar */
+.navbar .dropdown-menu {
+  background-color: rgba(139, 69, 19, 0.95);
+  border: 1px solid var(--bronze-light);
+  border-radius: var(--card-border-radius);
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.navbar .dropdown-item {
+  color: var(--text-color);
+  font-family: 'Charm', cursive;
+  padding: 0.5rem 1rem;
+  transition: var(--transition-standard);
+  border-radius: 4px;
+}
+
+.navbar .dropdown-item:hover,
+.navbar .dropdown-item:focus {
+  background-color: rgba(205, 127, 50, 0.3);
+  color: var(--gold-color);
+}
+
+/* Mobile navbar optimizations */
+@media (max-width: 991.98px) {
+  .navbar-collapse {
+    background-color: rgba(139, 69, 19, 0.98);
+    border-radius: var(--card-border-radius);
+    padding: 1rem;
+    margin-top: 1rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+  
+  .navbar-nav {
+    padding: 0.5rem 0;
+  }
+  
+  .nav-item {
+    margin: 0.25rem 0;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .nav-link {
+    padding: 0.75rem 1rem !important;
+    display: inline-block;
+    width: 100%;
+    border-radius: 4px;
+  }
+  
+  .nav-link:hover {
+    background-color: rgba(205, 127, 50, 0.2);
+  }
+  
+  .nav-link::after {
+    bottom: 5px;
+  }
+  
+  .navbar-brand span {
+    font-size: 1.5rem;
+  }
+  
+  .navbar-brand img {
+    height: 35px;
+  }
+}
+
+/* For very small screens */
+@media (max-width: 575.98px) {
+  .navbar {
+    padding: 0.75rem 1rem;
+  }
+  
+  .navbar.scrolled {
+    padding: 0.5rem 1rem;
+  }
+  
+  .navbar-brand span {
+    font-size: 1.3rem;
+    max-width: 150px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .navbar-brand img {
+    height: 30px;
+  }
+}
+
+    /* Hero Section */
+    .hero-section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      padding: 8rem 0 5rem;
+    }
+
+    /* Decorative Corner Elements */
+    .corner-decoration {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      opacity: 0.7;
+    }
+
+    .top-left {
+      top: 100px;
+      left: 20px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M10,10 L40,10 L40,15 L15,15 L15,40 L10,40 Z' fill='%23D4AF37'/%3E%3Cpath d='M20,20 L50,20 L50,25 L25,25 L25,50 L20,50 Z' fill='%23D4AF37' opacity='0.7'/%3E%3Cpath d='M30,30 L60,30 L60,35 L35,35 L35,60 L30,60 Z' fill='%23D4AF37' opacity='0.4'/%3E%3C/svg%3E");
+      animation: rotateAnimation 30s linear infinite;
+    }
+
+    .top-right {
+      top: 100px;
+      right: 20px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M90,10 L60,10 L60,15 L85,15 L85,40 L90,40 Z' fill='%23D4AF37'/%3E%3Cpath d='M80,20 L50,20 L50,25 L75,25 L75,50 L80,50 Z' fill='%23D4AF37' opacity='0.7'/%3E%3Cpath d='M70,30 L40,30 L40,35 L65,35 L65,60 L70,60 Z' fill='%23D4AF37' opacity='0.4'/%3E%3C/svg%3E");
+      animation: rotateAnimation 30s linear infinite reverse;
+    }
+
+    .bottom-left {
+      bottom: 20px;
+      left: 20px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M10,90 L40,90 L40,85 L15,85 L15,60 L10,60 Z' fill='%23D4AF37'/%3E%3Cpath d='M20,80 L50,80 L50,75 L25,75 L25,50 L20,50 Z' fill='%23D4AF37' opacity='0.7'/%3E%3Cpath d='M30,70 L60,70 L60,65 L35,65 L35,40 L30,40 Z' fill='%23D4AF37' opacity='0.4'/%3E%3C/svg%3E");
+      animation: rotateAnimation 30s linear infinite;
+    }
+
+    .bottom-right {
+      bottom: 20px;
+      right: 20px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M90,90 L60,90 L60,85 L85,85 L85,60 L90,60 Z' fill='%23D4AF37'/%3E%3Cpath d='M80,80 L50,80 L50,75 L75,75 L75,50 L80,50 Z' fill='%23D4AF37' opacity='0.7'/%3E%3Cpath d='M70,70 L40,70 L40,65 L65,65 L65,40 L70,40 Z' fill='%23D4AF37' opacity='0.4'/%3E%3C/svg%3E");
+      animation: rotateAnimation 30s linear infinite reverse;
+    }
+
+    @keyframes rotateAnimation {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .hero-content {
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-date {
+      display: inline-flex;
+      gap: 2rem;
+      align-items: center;
+      margin-bottom: 2rem;
+      background-color: rgba(205, 127, 50, 0.2);
+      padding: 0.8rem 2rem;
+      border-radius: 50px;
+      border: 1px solid rgba(205, 127, 50, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-date::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, rgba(212, 175, 55, 0.1), rgba(212, 175, 55, 0), rgba(212, 175, 55, 0.1));
+      animation: shimmer 2s infinite;
+    }
+
+    @keyframes shimmer {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    .hero-date span {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1rem;
+      font-family: 'Charm', cursive;
+      color: var(--gold-color);
+    }
+
+    .hero-title {
+    font-size: 5rem;
+    font-weight: 700;
+    color: var(--gold-color);
+    margin: 2rem 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    font-family: 'Dancing Script', cursive;
+    letter-spacing: 2px;
+    position: relative;
+    display: inline-block;
+}
+
+    .hero-title::before,
+    .hero-title::after {
+      content: '';
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      opacity: 0.5;
+    }
+
+    .hero-title::before {
+      top: -20px;
+      left: -30px;
+      border-top: 3px solid var(--gold-color);
+      border-left: 3px solid var(--gold-color);
+    }
+
+    .hero-title::after {
+      bottom: -20px;
+      right: -30px;
+      border-bottom: 3px solid var(--gold-color);
+      border-right: 3px solid var(--gold-color);
+    }
+
+    .coming-soon {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--red-traditional);
+    text-align: center;
+    margin-bottom: 2rem;
+    font-family: 'Dancing Script', cursive;
+    position: relative;
+    display: inline-block;
+}
+
+    .coming-soon::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 2px;
+      background-color: var(--red-traditional);
+    }
+
+    /* Animated Pulse Effect */
+    @keyframes pulse {
+      0% { opacity: 0.7; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.05); }
+      100% { opacity: 0.7; transform: scale(1); }
+    }
+
+    .pulse-animation {
+      animation: pulse 2s infinite;
+    }
+
+    /* Countdown Styling */
+    .countdown-container {
+      margin: 3rem 0;
+      position: relative;
+    }
+
+    .countdown-container::before,
+    .countdown-container::after {
+      content: '';
+      position: absolute;
+      width: 100px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold-color), transparent);
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .countdown-container::before {
+      top: -20px;
+    }
+
+    .countdown-container::after {
+      bottom: -20px;
+    }
+
+    .countdown {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+    }
+
+    .countdown-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: linear-gradient(145deg, rgba(205, 127, 50, 0.2), rgba(205, 127, 50, 0.1));
+      padding: 1.5rem;
+      border-radius: 10px;
+      min-width: 120px;
+      border: 1px solid rgba(205, 127, 50, 0.3);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      transition: var(--transition-standard);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .countdown-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='none' stroke='%23CD7F32' stroke-width='1' opacity='0.2'/%3E%3Ccircle cx='50' cy='50' r='35' fill='none' stroke='%23CD7F32' stroke-width='1' opacity='0.2'/%3E%3Ccircle cx='50' cy='50' r='25' fill='none' stroke='%23CD7F32' stroke-width='1' opacity='0.2'/%3E%3C/svg%3E");
+      background-size: cover;
+      opacity: 0.1;
+      z-index: -1;
+    }
+
+    .countdown-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .countdown-value {
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: var(--gold-color);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .countdown-label {
+      font-size: 1rem;
+      color: var(--text-color);
+      text-transform: uppercase;
+      font-family: 'Charm', cursive;
+      letter-spacing: 1px;
+    }
+
+    .countdown-separator {
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--gold-color);
+      opacity: 0.7;
+      align-self: center;
+    }
+
+    /* Action Buttons */
+    .action-buttons {
+      display: flex;
+      gap: 1.5rem;
+      margin: 3rem 0;
+      justify-content: center;
+    }
+
+    .btn-custom {
+    padding: 0.8rem 2.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--transition-standard);
+    font-family: 'Charm', cursive;
+    font-size: 1.1rem;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+    .btn-custom::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 100%;
+      background-color: rgba(255, 255, 255, 0.1);
+      transition: var(--transition-standard);
+      z-index: -1;
+    }
+
+    .btn-custom:hover::before {
+      width: 100%;
+    }
+
+    .btn-primary-custom {
+      background: linear-gradient(45deg, var(--bronze-light), var(--gold-color));
+      color: var(--bronze-dark);
+      border: 1px solid var(--gold-color);
+    }
+
+    .btn-secondary-custom {
+      background-color: rgba(205, 127, 50, 0.3);
+      color: var(--text-color);
+      border: 1px solid var(--bronze-light);
+    }
+
+    .btn-custom:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Sponsors Section */
+    .sponsors-section {
+      padding: var(--section-padding);
+      background-color: rgba(139, 69, 19, 0.3);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .sponsors-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='90' fill='none' stroke='%23CD7F32' stroke-width='1' opacity='0.1'/%3E%3Ccircle cx='100' cy='100' r='70' fill='none' stroke='%23CD7F32' stroke-width='1' opacity='0.1'/%3E%3Ccircle cx='100' cy='100' r='50' fill='none' stroke='%23CD7F32' stroke-width='1' opacity='0.1'/%3E%3C/svg%3E");
+      background-size: 200px;
+      opacity: 0.2;
+      z-index: -1;
+    }
+
+    .section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 3rem;
+    color: var(--gold-color);
+    text-align: center;
+    font-family: 'Dancing Script', cursive;
+    position: relative;
+    padding-bottom: 1rem;
+}
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 2px;
+      background-color: var(--gold-color);
+    }
+
+    /* Decorative Title Elements */
+    .section-title-decoration {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+
+    .title-decoration {
+      width: 30px;
+      height: 30px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 50'%3E%3Cpath d='M25,5 L30,20 L45,25 L30,30 L25,45 L20,30 L5,25 L20,20 Z' fill='none' stroke='%23D4AF37' stroke-width='1.5'/%3E%3C/svg%3E");
+      margin: 0 10px;
+    }
+
+    .title-line {
+      height: 2px;
+      width: 50px;
+      background: linear-gradient(90deg, transparent, var(--gold-color), transparent);
+    }
+
+    .sponsor-group {
+      margin-bottom: 2rem;
+    }
+
+    .sponsor-group h3 {
+    font-size: 1.2rem;
+    font-weight: normal;
+    font-family: 'Charm', cursive;
+    color: var(--gold-color);
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+    .sponsor-logos {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .sponsor-logo {
+      height: 60px;
+      object-fit: contain;
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 10px;
+      border-radius: 8px;
+      transition: var(--transition-standard);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .sponsor-logo::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0));
+      transform: rotate(45deg);
+      transition: all 0.5s;
+      opacity: 0;
+    }
+
+    .sponsor-logo:hover {
+      transform: scale(1.1);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .sponsor-logo:hover::before {
+      animation: shine 1.5s;
+    }
+
+    @keyframes shine {
+      0% { opacity: 0; transform: translateX(-100%) rotate(45deg); }
+      50% { opacity: 1; }
+      100% { opacity: 0; transform: translateX(100%) rotate(45deg); }
+    }
+
+    /* About Section */
+    .about-section {
+      padding: var(--section-padding);
+      position: relative;
+    }
+
+    .about-card {
+      background: linear-gradient(145deg, rgba(139, 69, 19, 0.5), rgba(139, 69, 19, 0.3));
+      padding: 3rem;
+      border-radius: var(--card-border-radius);
+      border: 1px solid var(--bronze-light);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='none' stroke='%23CD7F32' stroke-width='1' opacity='0.2'/%3E%3Ccircle cx='50' cy='50' r='35' fill='none' stroke='%23CD7F32' stroke-width='1' opacity='0.2'/%3E%3Ccircle cx='50' cy='50' r='25' fill='none' stroke='%23CD7F32' stroke-width='1' opacity='0.2'/%3E%3Cpath d='M25,50 C25,35 75,35 75,50 C75,65 25,65 25,50 Z' fill='none' stroke='%23CD7F32' stroke-width='1' opacity='0.2'/%3E%3C/svg%3E");
+      opacity: 0.1;
+      z-index: -1;
+    }
+
+    .highlight-text {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--red-traditional);
+    margin: 2rem 0;
+    text-align: center;
+    font-family: 'Dancing Script', cursive;
+    position: relative;
+    padding: 0 20px;
+}
+
+    .highlight-text::before,
+    .highlight-text::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 30px;
+      height: 30px;
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+
+    .highlight-text::before {
+      left: -15px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 50'%3E%3Cpath d='M10,25 L40,25 M25,10 L25,40' stroke='%23C41E3A' stroke-width='2'/%3E%3Ccircle cx='25' cy='25' r='15' fill='none' stroke='%23C41E3A' stroke-width='1'/%3E%3C/svg%3E");
+    }
+
+    .highlight-text::after {
+      right: -15px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 50'%3E%3Cpath d='M10,25 L40,25 M25,10 L25,40' stroke='%23C41E3A' stroke-width='2'/%3E%3Ccircle cx='25' cy='25' r='15' fill='none' stroke='%23C41E3A' stroke-width='1'/%3E%3C/svg%3E");
+    }
+
+    .about-card p {
+      margin-bottom: 1.5rem;
+      font-size: 1.1rem;
+      line-height: 1.8;
+    }
+
+    /* Video Section */
+    .video-section {
+      padding: var(--section-padding);
+      position: relative;
+    }
+
+    .video-container {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      background-color: rgba(0, 0, 0, 0.3);
+      border-radius: var(--card-border-radius);
+      overflow: hidden;
+      border: 1px solid var(--bronze-light);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .video-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Ccircle cx='10' cy='10' r='8' fill='none' stroke='%23CD7F32' stroke-width='0.5' opacity='0.2'/%3E%3C/svg%3E");
+      background-size: 20px;
+      opacity: 0.1;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      z-index: 2;
+    }
+
+    /* Features Section */
+    .features-section {
+      padding: var(--section-padding);
+      position: relative;
+    }
+
+    .feature-card {
+      background: linear-gradient(145deg, rgba(205, 127, 50, 0.3), rgba(205, 127, 50, 0.1));
+      padding: 2rem;
+      border-radius: var(--card-border-radius);
+      transition: var(--transition-standard);
+      border: 1px solid var(--bronze-light);
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, rgba(205, 127, 50, 0.1), rgba(212, 175, 55, 0.1));
+      z-index: -1;
+      opacity: 0;
+      transition: var(--transition-standard);
+    }
+
+    .feature-card:hover::before {
+      opacity: 1;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .feature-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+      border: 1px solid var(--gold-color);
+      transition: var(--transition-standard);
+    }
+
+    .feature-card:hover img {
+      transform: scale(1.05);
+    }
+
+    .feature-card h3 {
+    color: var(--gold-color);
+    margin-bottom: 1rem;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.8rem;
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+    .feature-card h3::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50px;
+      height: 2px;
+      background-color: var(--gold-color);
+      transition: var(--transition-standard);
+    }
+
+    .feature-card:hover h3::after {
+      width: 80px;
+    }
+
+    /* Timeline Section */
+    .timeline-section {
+      padding: var(--section-padding);
+      position: relative;
+    }
+
+    .timeline {
+      position: relative;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .timeline::after {
+      content: '';
+      position: absolute;
+      width: 6px;
+      background-color: var(--bronze-light);
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      margin-left: -3px;
+      border-radius: 10px;
+    }
+
+    .timeline-item {
+      padding: 10px 40px;
+      position: relative;
+      width: 50%;
+      box-sizing: border-box;
+    }
+
+    .timeline-item::after {
+      content: '';
+      position: absolute;
+      width: 25px;
+      height: 25px;
+      right: -12px;
+      background-color: var(--gold-color);
+      border: 4px solid var(--bronze-dark);
+      top: 15px;
+      border-radius: 50%;
+      z-index: 1;
+    }
+
+    .timeline-item.left {
+      left: 0;
+    }
+
+    .timeline-item.right {
+      left: 50%;
+    }
+
+    .timeline-item.right::after {
+      left: -12px;
+    }
+
+    .timeline-content {
+      padding: 20px 30px;
+      background: linear-gradient(145deg, rgba(205, 127, 50, 0.3), rgba(205, 127, 50, 0.1));
+      position: relative;
+      border-radius: var(--card-border-radius);
+      border: 1px solid var(--bronze-light);
+    }
+
+    .timeline-content h3 {
+    color: var(--gold-color);
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+    .timeline-content .date {
+      color: var(--text-color);
+      font-style: italic;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    /* Registration Form */
+    .registration-section {
+      padding: var(--section-padding);
+      position: relative;
+    }
+
+    .form-card {
+      background: linear-gradient(145deg, rgba(139, 69, 19, 0.5), rgba(139, 69, 19, 0.3));
+      padding: 3rem;
+      border-radius: var(--card-border-radius);
+      border: 1px solid var(--bronze-light);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .form-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='90' fill='none' stroke='%23CD7F32' stroke-width='1' opacity='0.1'/%3E%3Ccircle cx='100' cy='100' r='70' fill='none' stroke='%23CD7F32' stroke-width='1' opacity='0.1'/%3E%3Ccircle cx='100' cy='100' r='50' fill='none' stroke='%23CD7F32' stroke-width='1' opacity='0.1'/%3E%3C/svg%3E");
+      background-size: 200px;
+      opacity: 0.1;
+      z-index: -1;
+    }
+
+    .form-control {
+      background-color: rgba(255, 255, 255, 0.1);
+      border: 1px solid var(--bronze-light);
+      color: var(--text-color);
+      padding: 0.8rem 1.2rem;
+      margin-bottom: 1.5rem;
+      transition: var(--transition-standard);
+    }
+
+    .form-control:focus {
+      background-color: rgba(255, 255, 255, 0.15);
+      border-color: var(--gold-color);
+      box-shadow: 0 0 0 0.25rem rgba(212, 175, 55, 0.25);
+      color: var(--text-color);
+    }
+
+    .form-control::placeholder {
+      color: rgba(255, 248, 220, 0.7);
+    }
+
+    .form-label {
+    color: var(--gold-color);
+    margin-bottom: 0.5rem;
+    font-family: 'Charm', cursive;
+}
+
+    .form-select {
+      background-color: rgba(255, 255, 255, 0.1);
+      border: 1px solid var(--bronze-light);
+      color: var(--text-color);
+    }
+
+    .form-select:focus {
+      background-color: rgba(255, 255, 255, 0.15);
+      border-color: var(--gold-color);
+      box-shadow: 0 0 0 0.25rem rgba(212, 175, 55, 0.25);
+      color: var(--text-color);
+    }
+
+    /* Footer */
+    .footer {
+      background-color: rgba(139, 69, 19, 0.9);
+      padding: 4rem 0 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='90' fill='none' stroke='%23CD7F32' stroke-width='1' opacity='0.1'/%3E%3Ccircle cx='100' cy='100' r='70' fill='none' stroke='%23CD7F32' stroke-width='1' opacity='0.1'/%3E%3Ccircle cx='100' cy='100' r='50' fill='none' stroke='%23CD7F32' stroke-width='1' opacity='0.1'/%3E%3C/svg%3E");
+      opacity: 0.2;
+      z-index: -1;
+    }
+
+    .footer-logo {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.5rem;
+    color: var(--gold-color);
+    margin-bottom: 1.5rem;
+    display: block;
+}
+
+    .footer-text {
+      margin-bottom: 2rem;
+      color: var(--text-color);
+      opacity: 0.8;
+    }
+
+    .footer-links h4 {
+    color: var(--gold-color);
+    font-family: 'Charm', cursive;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+}
+
+    .footer-links ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .footer-links li {
+      margin-bottom: 0.8rem;
+    }
+
+    .footer-links a {
+      color: var(--text-color);
+      text-decoration: none;
+      transition: var(--transition-standard);
+      opacity: 0.8;
+      display: inline-block;
+    }
+
+    .footer-links a:hover {
+      color: var(--gold-color);
+      opacity: 1;
+      transform: translateX(5px);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .social-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background-color: rgba(205, 127, 50, 0.3);
+      border-radius: 50%;
+      color: var(--text-color);
+      transition: var(--transition-standard);
+      border: 1px solid var(--bronze-light);
+    }
+
+    .social-link:hover {
+      background-color: var(--gold-color);
+      color: var(--bronze-dark);
+      transform: translateY(-5px);
+    }
+
+    .copyright {
+      text-align: center;
+      padding-top: 2rem;
+      margin-top: 3rem;
+      border-top: 1px solid rgba(205, 127, 50, 0.3);
+      color: var(--text-color);
+      opacity: 0.7;
+    }
+
+    /* Back to Top Button */
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      background-color: var(--gold-color);
+      color: var(--bronze-dark);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition-standard);
+      z-index: 999;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .back-to-top.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .back-to-top:hover {
+      background-color: var(--bronze-light);
+      transform: translateY(-5px);
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 991px) {
+      .hero-title {
+        font-size: 4rem;
+      }
+
+      .countdown-item {
+        min-width: 100px;
+        padding: 1rem;
+      }
+
+      .countdown-value {
+        font-size: 2.5rem;
+      }
+
+      .timeline::after {
+        left: 31px;
+      }
+
+      .timeline-item {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 25px;
+      }
+
+      .timeline-item.right {
+        left: 0;
+      }
+
+      .timeline-item.left::after,
+      .timeline-item.right::after {
+        left: 18px;
+      }
+
+      .corner-decoration {
+        width: 70px;
+        height: 70px;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .hero-title {
+        font-size: 3rem;
+      }
+
+      .coming-soon {
+        font-size: 1.8rem;
+      }
+
+      .hero-date {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .countdown {
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+
+      .countdown-item {
+        min-width: 80px;
+        padding: 0.8rem;
+      }
+
+      .countdown-value {
+        font-size: 2rem;
+      }
+
+      .countdown-separator {
+        display: none;
+      }
+
+      .action-buttons {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .btn-custom {
+        width: 100%;
+      }
+
+      .section-title {
+        font-size: 2rem;
+      }
+
+      .about-card,
+      .form-card {
+        padding: 1.5rem;
+      }
+
+      .decorative-element {
+        display: none;
+      }
+
+      .corner-decoration {
+        width: 50px;
+        height: 50px;
+      }
+    }
+
+    @media (max-width: 575px) {
+      .hero-title {
+        font-size: 2.5rem;
+      }
+
+      .coming-soon {
+        font-size: 1.5rem;
+      }
+
+      .countdown-item {
+        min-width: 70px;
+        padding: 0.5rem;
+      }
+
+      .countdown-value {
+        font-size: 1.5rem;
+      }
+
+      .corner-decoration {
+        width: 40px;
+        height: 40px;
+      }
+    }
+
+/* Gallery Section */
+.gallery-section {
+  background-color: rgba(139, 69, 19, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.gallery-item {
+  border-radius: var(--card-border-radius);
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  transition: var(--transition-standard);
+}
+
+.gallery-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  transition: var(--transition-standard);
+}
+
+.gallery-item:hover img {
+  transform: scale(1.05);
+}
+
+/* Update all decorative titles to use Dancing Script */
+.section-title,
+.hero-title,
+.coming-soon,
+.highlight-text,
+.feature-card h3,
+.footer-logo,
+.timeline-content h3 {
+  font-family: 'Dancing Script', cursive;
+}
+
+/* Update all secondary elements to use Charm */
+.nav-link,
+.hero-date span,
+.countdown-label,
+.btn-custom,
+.form-label,
+.footer-links h4,
+.navbar .dropdown-item,
+.sponsor-group h3,
+.timeline-content .date {
+  font-family: 'Charm', cursive;
+}
+
+/* Make sure all card titles and section subtitles are consistent */
+.about-card h4,
+.about-card h5,
+.form-card .form-label {
+  font-family: 'Charm', cursive;
+}
+
+.about-card .text-center h4,
+.about-card .text-center .card-title,
+.about-card .mt-5 h4,
+.about-card .mt-4 h5,
+.about-card .mt-4 .card-title {
+  font-family: 'Dancing Script', cursive;
+}
+
+/* Update accordion headers */
+.accordion-button {
+    background: transparent; 
+    color: var(--gold-color); 
+    font-family: 'Charm', cursive;
+}
+  </style>
 </head>
 <body>
   <!-- Bronze Drum Background -->
@@ -26,39 +1427,55 @@
   <div class="decorative-element pattern-2"></div>
 
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg fixed-top">
-    <div class="container">
-      <a class="navbar-brand" href="#">
-  <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/vnus-l6vx4xdUsdbCLD6cwUTBhEf66zYGYq.png" alt="VNUS Logo" style="height: 40px; margin-right: 10px;">
-  <span>Hành Trình Tuổi Trẻ</span>
-</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <i class="fas fa-bars"></i>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a class="nav-link active" href="#home">Trang chủ</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#about">Giới thiệu</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#features">Hoạt động</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#timeline">Lịch trình</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#register">Đăng ký</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#sponsors">Nhà tài trợ</a>
-          </li>
-        </ul>
-      </div>
+  
+<nav class="navbar navbar-expand-lg fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="#">
+      <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/vnus-l6vx4xdUsdbCLD6cwUTBhEf66zYGYq.png" alt="VNUS Logo">
+      <span>Hành Trình Tuổi Trẻ</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <i class="fas fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" href="#home">Trang chủ</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#about">Giới thiệu</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Chương trình
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#program">Nội dung</a></li>
+            <li><a class="dropdown-item" href="#features">Hoạt động</a></li>
+            <li><a class="dropdown-item" href="#timeline">Lịch trình</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Thông tin
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#prizes">Giải thưởng</a></li>
+            <li><a class="dropdown-item" href="#venue">Địa điểm</a></li>
+            <li><a class="dropdown-item" href="#preparation">Hướng dẫn</a></li>
+            <li><a class="dropdown-item" href="#faq">FAQ</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#register">Đăng ký</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#sponsors">Nhà tài trợ</a>
+        </li>
+      </ul>
     </div>
-  </nav>
+  </div>
+</nav>
 
   <!-- Hero Section -->
   <section class="hero-section" id="home">
@@ -72,8 +1489,8 @@
       <div class="row justify-content-center">
         <div class="col-lg-10 hero-content" data-aos="fade-up">
           <div class="hero-date">
-            <span><i class="fas fa-calendar"></i> 12 THÁNG 4 NĂM 2024</span>
-            <span><i class="fas fa-map-marker-alt"></i> ĐẠI HỌC QUỐC TẾ</span>
+            <span><i class="fas fa-calendar"></i> 18-19 THÁNG 4 NĂM 2025</span>
+            <span><i class="fas fa-map-marker-alt"></i> CÔNG VIÊN THANH NIÊN, ĐÀ NẴNG</span>
           </div>
 
           <h1 class="hero-title">Áng Hùng Văn Thiên Cổ</h1>
@@ -129,21 +1546,102 @@
       <div class="row justify-content-center">
         <div class="col-lg-10">
           <div class="about-card" data-aos="fade-up">
-            <p>🚗 Chuyến xe 2024 của Đoàn trường chính thức được khởi hành với một sự kiện vô cùng đặc biệt mang tên "Hành Trình Tuổi Trẻ". Đây chính là một cơ hội tuyệt vời để các bạn sinh viên bùng cháy trên mọi sân chơi, thể hiện cá tính, tài năng của bản thân.</p>
-            
-            <p>Và không để các bạn phải chờ lâu, BTC xin thông báo:</p>
-            
-            <p class="highlight-text pulse-animation">💥 "CHÍNH THỨC MỞ ĐƠN HÀNH TRÌNH TUỔI TRẺ 2024" 💥</p>
-            
-            <p>🔥 Đây là một trong những sự kiện lớn hàng năm của Đoàn trường ĐTQT với mong muốn tạo ra sân chơi lành mạnh, giúp các bạn IS-er có cơ hội phát triển toàn diện với những hoạt động thú vị như trang trí lều trại, trò chơi liên hoàn, trình diễn thời trang,... và có những phút giây thư giãn cùng dàn ca sĩ khách mời đặc biệt.</p>
-            
-            <p>✨ Đừng chần chờ gì mà hãy nhanh tay đăng ký tham gia ngày hội cùng chúng mình nhé!!!</p>
+          <p>🚗 Nhằm đa dạng hóa sân chơi cho sinh viên các khóa K27, K28, K29, K30 của Khoa Đào tạo Quốc tế – Đại học Duy Tân, tạo cơ hội giao lưu, giúp ích cho các bạn sinh viên ngày càng năng nổ, hoạt bát, có khả năng giao tiếp tốt hơn, rèn luyện nhiều kỹ năng sống.</p>
+          
+          <p>Thực hiện Chương trình công tác Đoàn, Hội và phong trào sinh viên năm học 2024 - 2025; Nhằm tạo môi trường giao lưu giữa các khóa sinh viên Khoa Đào Tạo Quốc Tế năm học 2024 – 2025 tựu trường, BCH Khoa Đào Tạo Quốc Tế xây dựng kế hoạch tổ chức Ngày Hội "Hành trình tuổi trẻ" năm học 2024 – 2025.</p>
+          
+          <p class="highlight-text pulse-animation">💥 "CHÍNH THỨC MỞ ĐƠN HÀNH TRÌNH TUỔI TRẺ 2025" 💥</p>
+          
+          <p>🔥 Đây là một trong những sự kiện lớn hàng năm của Đoàn trường ĐTQT với mong muốn tạo ra sân chơi lành mạnh, giúp các bạn sinh viên có cơ hội phát triển toàn diện với những hoạt động thú vị như trang trí lều trại, trò chơi liên hoàn, trình diễn thời trang, và có những phút giây thư giãn cùng dàn ca sĩ khách mời đặc biệt.</p>
+          
+          <p>✨ Đừng chần chờ gì mà hãy nhanh tay đăng ký tham gia ngày hội cùng chúng mình nhé!!!</p>
+          
+          <div class="mt-5">
+            <h4 class="text-center mb-4" style="color: var(--gold-color);">Thông Tin Sự Kiện</h4>
+            <div class="row">
+              <div class="col-md-6">
+                <ul>
+                  <li><strong>Thời gian:</strong> 06h00 – 22h30 ngày 18-19/04/2025</li>
+                  <li><strong>Địa điểm:</strong> Công viên Thanh Niên – Xuân Thủy, Cẩm Lệ, Đà Nẵng</li>
+                  <li><strong>Đối tượng:</strong> Sinh viên các khóa K27, K28, K29, K30</li>
+                </ul>
+              </div>
+              <div class="col-md-6">
+                <ul>
+                  <li><strong>Số lượng:</strong> Dự kiến 1000 sinh viên (30 đội)</li>
+                  <li><strong>Tổ chức:</strong> Đoàn Khoa Đào Tạo Quốc Tế</li>
+                  <li><strong>Chủ đề:</strong> "Dấu ấn Hồn Việt"</li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
+<!-- Program Section -->
+<section class="about-section" id="program">
+  <div class="container">
+    <div class="section-title-decoration">
+      <div class="title-line"></div>
+      <div class="title-decoration"></div>
+      <div class="title-line"></div>
+    </div>
+    <h2 class="section-title" data-aos="fade-up">Nội Dung Chương Trình</h2>
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="about-card" data-aos="fade-up">
+          <div class="mb-5">
+            <h4 style="color: var(--gold-color);">1. Lều trại (hệ số 2)</h4>
+            <p><strong>Hình thức thi:</strong> Mỗi đội thi sẽ lựa chọn một "Làng nghề truyền thống" đặc trưng của Việt Nam làm chủ đề chính cho gian hàng của mình và tái hiện không gian của làng nghề đó, trưng bày các sản phẩm thủ công, dụng cụ làm nghề và các hình ảnh tư liệu liên quan.</p>
+            <p><strong>Kích thước gian hàng:</strong> 5m x 4m</p>
+            <p><strong>Thời gian chấm điểm:</strong> 5-7 phút/ 1 đội</p>
+          </div>
+          
+          <div class="mb-5">
+            <h4 style="color: var(--gold-color);">2. Trò chơi liên hoàn (hệ số 1)</h4>
+            <p><strong>Hình thức tổ chức:</strong> BTC sẽ bố trí các trạm chơi, mỗi đội cử tối thiểu 20 người tham gia mỗi trạm. Hướng dẫn trò chơi sẽ có trong "Cẩm nang trại" do BTC ban hành.</p>
+            <p><strong>Hình thức chấm điểm:</strong> Tính thời gian đội nào vượt qua trạm nhanh nhất.</p>
+          </div>
+          
+          <div class="mb-5">
+            <h4 style="color: var(--gold-color);">3. Dân vũ đương đại (hệ số 2)</h4>
+            <p><strong>Hình thức thi:</strong> Tập thể lớp</p>
+            <p><strong>Thời lượng thể hiện:</strong> Từ 5 - 7 phút/ bài thi</p>
+            <p><strong>Số lượng thành viên:</strong> Tối thiểu 15 thành viên</p>
+            <p><strong>Chủ đề chính:</strong> "Dấu ấn Hồn Việt"</p>
+            <p>Các bài thi dân vũ thể hiện những xu hướng hiện đại của GenZ kết hợp với một trong các yếu tố văn hóa Việt Nam để thể hiện một trong các chủ đề phụ sau:</p>
+            <ul>
+              <li>Văn hóa – Lịch sử: Thể hiện chủ đề về các yếu tố lịch sử dân tộc</li>
+              <li>Văn học Việt Nam: Thể hiện chủ đề liên quan đến văn học Việt Nam</li>
+              <li>Dân gian đương đại: Các bài dân vũ kết hợp giữa các yếu tố hiện đại của GenZ và các yếu tố văn hóa dân gian</li>
+            </ul>
+          </div>
+          
+          <div class="mb-5">
+            <h4 style="color: var(--gold-color);">4. Thi trang phục "Văn học Việt Nam" (hệ số 1)</h4>
+            <p><strong>Hình thức tổ chức:</strong> Mỗi đội chọn 1 Nam và 1 Nữ mặc trang phục của đơn vị mình tự thiết kế và trình diễn trên sân khấu theo hình thức biểu diễn thời trang kèm theo phần thuyết trình về ý nghĩa trang phục.</p>
+            <p><strong>Chất liệu:</strong> Tất cả các vật liệu có thể dùng để thiết kế trang phục</p>
+            <p><strong>Chủ đề thiết kế trang phục:</strong> Bản sắc hồn Việt</p>
+            <p><strong>Thời gian trình diễn:</strong> 1 phút 30 giây cho mỗi bộ trang phục</p>
+          </div>
+          
+          <div class="mb-5">
+            <h4 style="color: var(--gold-color);">5. Trò chơi lớn (Hệ số 1)</h4>
+            <p><strong>Hình thức thi:</strong> Mỗi đội chơi cử 7 thành viên tham gia thi trò chơi lớn. Các đội lần lượt vượt qua các thử thách của BTC và giải mật thư do BTC đưa ra để hoàn thành trò chơi.</p>
+            <p><strong>Hình thức chấm điểm:</strong> Tính thời gian đội nào vượt qua trạm nhanh nhất.</p>
+          </div>
+          
+          <div>
+            <h4 style="color: var(--gold-color);">Giải toàn đoàn</h4>
+            <p>Kết thúc Ngày hội, BTC sẽ xét Giải toàn đoàn (tính theo hệ số) cho các đơn vị có tham gia đầy đủ các nội dung.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
   <!-- Video Section -->
   <section class="video-section">
     <div class="container">
@@ -175,13 +1673,13 @@
         <div class="col-lg-10">
           <div class="about-card" data-aos="fade-up">
             <h2 class="section-title">Bùng Nổ Teaser Trò Chơi Lớn - Áng Hùng Văn Thiên Cổ</h2>
-            
+
             <p>🚀 Những phút giây căng thẳng để unbox các địa điểm thú vị sau mỗi chiếc mật thư đã trở thành một phần không thể thiếu trong bất kỳ "Ngày hội tuổi trẻ" nào từ trước đến nay.</p>
-            
+
             <p>🗝 Với chủ đề "Áng Hùng Văn Thiên Cổ", Trò chơi lớn lần này được khoác lên mình màu sắc của những cuộc phiêu lưu đầy bất ngờ và thách thức, đưa các IS-ers trở về với thanh âm và hơi thở của lịch sử dân tộc.</p>
-            
+
             <p>💥 Những trận đấu đỉnh cao và những bí mật cổ xưa đang dần hé lộ tại "Áng Hùng Văn Thiên Cổ"!</p>
-            
+
             <p>Đừng bỏ lỡ cơ hội bước vào thế giới lịch sử đầy huyền bí, nơi những anh hùng và truyền thuyết được tái hiện với sự sống động và hấp dẫn chỉ có duy nhất tại Ngày hội "Hành Trình Tuổi Trẻ"!</p>
           </div>
         </div>
@@ -301,42 +1799,432 @@
       <div class="timeline">
         <div class="timeline-item left" data-aos="fade-right">
           <div class="timeline-content">
-            <h3>Mở Đơn Đăng Ký</h3>
-            <span class="date">15 Tháng 3, 2024</span>
-            <p>Bắt đầu nhận đơn đăng ký tham gia từ các đội. Mỗi đội tối đa 10 thành viên.</p>
+            <h3>[Giai đoạn 1] - Mở đơn đăng ký</h3>
+            <span class="date">07/03/2025 - 23:59 21/03/2025</span>
+            <p>Các bạn hãy nhanh tay đăng ký để không bỏ lỡ cơ hội tham gia vào sự kiện hoành tráng này nhé!</p>
           </div>
         </div>
         <div class="timeline-item right" data-aos="fade-left">
           <div class="timeline-content">
-            <h3>Đóng Đơn Đăng Ký</h3>
-            <span class="date">30 Tháng 3, 2024</span>
-            <p>Kết thúc nhận đơn đăng ký. Công bố danh sách các đội tham gia chính thức.</p>
+            <h3>[Giai đoạn 2] - Training Camp</h3>
+            <span class="date">15:00 - 17:00, 13/04/2025</span>
+            <p>Địa điểm: Trường Đại học FPT Đà Nẵng</p>
           </div>
         </div>
         <div class="timeline-item left" data-aos="fade-right">
           <div class="timeline-content">
-            <h3>Họp Đội Trưởng</h3>
-            <span class="date">5 Tháng 4, 2024</span>
-            <p>Buổi họp phổ biến luật chơi, quy định và thông tin chi tiết cho các đội trưởng.</p>
+            <h3>[Giai đoạn 3] - Teambuilding</h3>
+            <span class="date">07:30 - 11:30, 18/04/2025</span>
+            <p>Địa điểm: Công viên Thanh Niên, Đà Nẵng</p>
           </div>
         </div>
         <div class="timeline-item right" data-aos="fade-left">
           <div class="timeline-content">
-            <h3>Ngày Hội Chính</h3>
-            <span class="date">12 Tháng 4, 2024</span>
-            <p>Diễn ra các hoạt động chính của sự kiện, bao gồm trò chơi lớn, biểu diễn văn nghệ và trao giải.</p>
+            <h3>[Giai đoạn 4] - Gala Dinner</h3>
+            <span class="date">18:00 - 21:00, 18/04/2025</span>
+            <p>Địa điểm: Công viên Thanh Niên, Đà Nẵng</p>
           </div>
         </div>
         <div class="timeline-item left" data-aos="fade-right">
           <div class="timeline-content">
-            <h3>Tổng Kết Sự Kiện</h3>
-            <span class="date">15 Tháng 4, 2024</span>
-            <p>Công bố kết quả chính thức, chia sẻ hình ảnh và video của sự kiện trên các nền tảng truyền thông.</p>
+            <h3>[Giai đoạn 5] - Chung kết và Bế mạc</h3>
+            <span class="date">07:30 - 11:30, 19/04/2025</span>
+            <p>Địa điểm: Công viên Thanh Niên, Đà Nẵng</p>
           </div>
         </div>
       </div>
     </div>
   </section>
+
+  <!-- Prizes Section -->
+<section class="about-section" id="prizes">
+  <div class="container">
+    <div class="section-title-decoration">
+      <div class="title-line"></div>
+      <div class="title-decoration"></div>
+      <div class="title-line"></div>
+    </div>
+    <h2 class="section-title" data-aos="fade-up">Giải Thưởng</h2>
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="about-card" data-aos="fade-up">
+          <div class="text-center mb-4">
+  <h4 style="color: var(--gold-color); font-family: 'Dancing Script', cursive;">Tổng giá trị giải thưởng lên đến 20.000.000 VNĐ</h4>
+  <p class="mb-4">Các đội tham gia sẽ có cơ hội nhận được những phần thưởng giá trị từ Ban Tổ Chức</p>
+</div>
+
+<div class="row mb-5">
+  <div class="col-md-6 mb-4">
+    <div class="card h-100" style="background: linear-gradient(145deg, rgba(205, 127, 50, 0.3), rgba(205, 127, 50, 0.1)); border: 1px solid var(--bronze-light); border-radius: var(--card-border-radius);">
+      <div class="card-body">
+        <h5 class="card-title text-center" style="color: var(--gold-color); font-family: 'Dancing Script', cursive; font-size: 1.5rem;">Lều trại (hệ số 2)</h5>
+        <ul style="color: var(--text-color); list-style-type: none; padding-left: 0;">
+          <li class="mb-2"><strong>Giải Nhất:</strong> 700.000 VNĐ (1 giải)</li>
+          <li class="mb-2"><strong>Giải Nhì:</strong> 600.000 VNĐ (2 giải)</li>
+          <li class="mb-2"><strong>Giải Ba:</strong> 500.000 VNĐ (3 giải)</li>
+          <li class="mb-2"><strong>Giải Khuyến khích:</strong> 400.000 VNĐ (4 giải)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-md-6 mb-4">
+    <div class="card h-100" style="background: linear-gradient(145deg, rgba(205, 127, 50, 0.3), rgba(205, 127, 50, 0.1)); border: 1px solid var(--bronze-light); border-radius: var(--card-border-radius);">
+      <div class="card-body">
+        <h5 class="card-title text-center" style="color: var(--gold-color); font-family: 'Dancing Script', cursive; font-size: 1.5rem;">Dân vũ đương đại (hệ số 2)</h5>
+        <ul style="color: var(--text-color); list-style-type: none; padding-left: 0;">
+          <li class="mb-2"><strong>Giải Nhất:</strong> 700.000 VNĐ (1 giải)</li>
+          <li class="mb-2"><strong>Giải Nhì:</strong> 600.000 VNĐ (2 giải)</li>
+          <li class="mb-2"><strong>Giải Ba:</strong> 500.000 VNĐ (3 giải)</li>
+          <li class="mb-2"><strong>Giải Khuyến khích:</strong> 400.000 VNĐ (4 giải)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-md-6 mb-4">
+    <div class="card h-100" style="background: linear-gradient(145deg, rgba(205, 127, 50, 0.3), rgba(205, 127, 50, 0.1)); border: 1px solid var(--bronze-light); border-radius: var(--card-border-radius);">
+      <div class="card-body">
+        <h5 class="card-title text-center" style="color: var(--gold-color); font-family: 'Dancing Script', cursive; font-size: 1.5rem;">Trò chơi liên hoàn/Trò chơi lớn (hệ số 1)</h5>
+        <ul style="color: var(--text-color); list-style-type: none; padding-left: 0;">
+          <li class="mb-2"><strong>Giải Nhất:</strong> 500.000 VNĐ (1 giải)</li>
+          <li class="mb-2"><strong>Giải Nhì:</strong> 400.000 VNĐ (2 giải)</li>
+          <li class="mb-2"><strong>Giải Ba:</strong> 300.000 VNĐ (3 giải)</li>
+          <li class="mb-2"><strong>Giải Khuyến khích:</strong> 200.000 VNĐ (4 giải)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-md-6 mb-4">
+    <div class="card h-100" style="background: linear-gradient(145deg, rgba(205, 127, 50, 0.3), rgba(205, 127, 50, 0.1)); border: 1px solid var(--bronze-light); border-radius: var(--card-border-radius);">
+      <div class="card-body">
+        <h5 class="card-title text-center" style="color: var(--gold-color); font-family: 'Dancing Script', cursive; font-size: 1.5rem;">Thi trang phục "Văn học Việt Nam" (hệ số 1)</h5>
+        <ul style="color: var(--text-color); list-style-type: none; padding-left: 0;">
+          <li class="mb-2"><strong>Giải Nhất:</strong> 500.000 VNĐ (1 giải)</li>
+          <li class="mb-2"><strong>Giải Nhì:</strong> 400.000 VNĐ (2 giải)</li>
+          <li class="mb-2"><strong>Giải Ba:</strong> 300.000 VNĐ (3 giải)</li>
+          <li class="mb-2"><strong>Giải Khuyến khích:</strong> 200.000 VNĐ (4 giải)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="text-center mt-4">
+  <div class="card mx-auto" style="max-width: 500px; background: linear-gradient(145deg, rgba(212, 175, 55, 0.3), rgba(212, 175, 55, 0.1)); border: 1px solid var(--gold-color); border-radius: var(--card-border-radius);">
+    <div class="card-body">
+      <h5 class="card-title" style="color: var(--gold-color); font-family: 'Dancing Script', cursive; font-size: 1.8rem;">Giải toàn đoàn</h5>
+      <ul style="color: var(--text-color); list-style-type: none; padding-left: 0; text-align: left;">
+        <li class="mb-2"><strong>Giải Nhất:</strong> 1.000.000 VNĐ (1 giải)</li>
+        <li class="mb-2"><strong>Giải Nhì:</strong> 800.000 VNĐ (2 giải)</li>
+        <li class="mb-2"><strong>Giải Ba:</strong> 700.000 VNĐ (3 giải)</li>
+        <li class="mb-2"><strong>Giải Khuyến khích:</strong> 500.000 VNĐ (4 giải)</li>
+      </ul>
+    </div>
+  </div>
+</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="about-section" id="faq">
+  <div class="container">
+    <div class="section-title-decoration">
+      <div class="title-line"></div>
+      <div class="title-decoration"></div>
+      <div class="title-line"></div>
+    </div>
+    <h2 class="section-title" data-aos="fade-up">Câu Hỏi Thường Gặp</h2>
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="about-card" data-aos="fade-up">
+          <div class="accordion" id="faqAccordion">
+            <div class="accordion-item mb-3" style="background: linear-gradient(145deg, rgba(205, 127, 50, 0.3), rgba(205, 127, 50, 0.1)); border: 1px solid var(--bronze-light); border-radius: var(--card-border-radius); overflow: hidden;">
+              <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  Làm thế nào để đăng ký tham gia sự kiện?
+                </button>
+              </h2>
+              <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                <div class="accordion-body" style="color: var(--text-color);">
+                  Bạn có thể đăng ký tham gia bằng cách điền vào form đăng ký trên website này hoặc liên hệ trực tiếp với Ban tổ chức qua email hoặc số điện thoại được cung cấp. Thời hạn đăng ký từ ngày 07/03/2025 đến 23:59 ngày 21/03/2025.
+                </div>
+              </div>
+            </div>
+            
+            <div class="accordion-item mb-3" style="background: linear-gradient(145deg, rgba(205, 127, 50, 0.3), rgba(205, 127, 50, 0.1)); border: 1px solid var(--bronze-light); border-radius: var(--card-border-radius); overflow: hidden;">
+              <h2 class="accordion-header" id="headingTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  Mỗi đội cần bao nhiêu thành viên?
+                </button>
+              </h2>
+              <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+                <div class="accordion-body" style="color: var(--text-color);">
+                  Mỗi đội có thể có tối đa 40 thành viên. Tuy nhiên, số lượng thành viên tối thiểu sẽ phụ thuộc vào từng hoạt động cụ thể. Ví dụ: phần thi dân vũ đương đại yêu cầu tối thiểu 15 thành viên, trò chơi liên hoàn yêu cầu tối thiểu 20 người, và trò chơi lớn yêu cầu 7 thành viên.
+                </div>
+              </div>
+            </div>
+            
+            <div class="accordion-item mb-3" style="background: linear-gradient(145deg, rgba(205, 127, 50, 0.3), rgba(205, 127, 50, 0.1)); border: 1px solid var(--bronze-light); border-radius: var(--card-border-radius); overflow: hidden;">
+              <h2 class="accordion-header" id="headingThree">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                  Có phí tham gia không?
+                </button>
+              </h2>
+              <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+                <div class="accordion-body" style="color: var(--text-color);">
+                  Có, mỗi đội sẽ cần đóng một khoản phí tham gia. Chi tiết về phí tham gia sẽ được Ban tổ chức thông báo khi bạn đăng ký. Phí này sẽ được sử dụng để trang trải chi phí tổ chức sự kiện, bao gồm địa điểm, trang thiết bị, và các vật dụng cần thiết khác.
+                </div>
+              </div>
+            </div>
+            
+            <div class="accordion-item mb-3" style="background: linear-gradient(145deg, rgba(205, 127, 50, 0.3), rgba(205, 127, 50, 0.1)); border: 1px solid var(--bronze-light); border-radius: var(--card-border-radius); overflow: hidden;">
+              <h2 class="accordion-header" id="headingFour">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                  Cần chuẩn bị những gì khi tham gia sự kiện?
+                </button>
+              </h2>
+              <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordion">
+                <div class="accordion-body" style="color: var(--text-color);">
+                  Các đội cần chuẩn bị:
+                  <ul>
+                    <li>Trang phục biểu diễn cho phần thi dân vũ và trang phục "Văn học Việt Nam"</li>
+                    <li>Vật dụng trang trí cho lều trại theo chủ đề "Làng nghề truyền thống"</li>
+                    <li>Mang theo các sản phẩm thủ công, dụng cụ làm nghề</li>
+                    <li>Chuẩn bị hình ảnh, tư liệu về làng nghề</li>
+                    <li>Lên kế hoạch bố trí không gian gian hàng 5m x 4m</li>
+                    <li>Chuẩn bị bài thuyết trình ngắn gọn về làng nghề</li>
+                  </ul>
+                  Chi tiết cụ thể sẽ được cung cấp trong "Cẩm nang trại" khi các đội hoàn tất đăng ký.
+                </div>
+              </div>
+            </div>
+            
+            <div class="accordion-item" style="background: linear-gradient(145deg, rgba(205, 127, 50, 0.3), rgba(205, 127, 50, 0.1)); border: 1px solid var(--bronze-light); border-radius: var(--card-border-radius); overflow: hidden;">
+              <h2 class="accordion-header" id="headingFive">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                  Làm thế nào để liên hệ với Ban tổ chức nếu có thắc mắc?
+                </button>
+              </h2>
+              <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#faqAccordion">
+                <div class="accordion-body" style="color: var(--text-color);">
+                  Bạn có thể liên hệ với Ban tổ chức qua:
+                  <ul>
+                    <li>Email: doantruong@hcmiu.edu.vn</li>
+                    <li>Hotline: (028) 3724 4270</li>
+                    <li>Fanpage Facebook: <a href="#" style="color: var(--gold-color);">Đoàn Trường Đào Tạo Quốc Tế</a></li>
+                    <li>Hoặc liên hệ trực tiếp với các thành viên Ban tổ chức được liệt kê trong "Cẩm nang trại"</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Venue Information -->
+<section class="about-section" id="venue">
+  <div class="container">
+    <div class="section-title-decoration">
+      <div class="title-line"></div>
+      <div class="title-decoration"></div>
+      <div class="title-line"></div>
+    </div>
+    <h2 class="section-title" data-aos="fade-up">Thông Tin Địa Điểm</h2>
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="about-card" data-aos="fade-up">
+          <div class="row">
+            <div class="col-md-6 mb-4 mb-md-0">
+              <h4 style="color: var(--gold-color); font-family: 'Dancing Script', cursive; font-size: 1.8rem;">Công viên Thanh Niên</h4>
+              <p><i class="fas fa-map-marker-alt me-2" style="color: var(--gold-color);"></i> Xuân Thủy, Cẩm Lệ, Đà Nẵng</p>
+              <p>Công viên Thanh Niên là một không gian rộng rãi, thoáng mát với nhiều cây xanh và tiện ích, là địa điểm lý tưởng cho các hoạt động ngoài trời và sự kiện quy mô lớn.</p>
+              
+              <h5 style="color: var(--gold-color); font-family: 'Charm', cursive; margin-top: 20px;">Tiện ích tại địa điểm:</h5>
+              <ul>
+                <li>Khu vực dựng lều trại rộng rãi</li>
+                <li>Sân khấu ngoài trời</li>
+                <li>Hệ thống âm thanh, ánh sáng chuyên nghiệp</li>
+                <li>Khu vực vệ sinh</li>
+                <li>Điểm cấp nước sạch</li>
+                <li>Bãi đỗ xe rộng rãi</li>
+                <li>Khu vực ẩm thực</li>
+              </ul>
+              
+              <h5 style="color: var(--gold-color); font-family: 'Charm', cursive; margin-top: 20px;">Phương tiện di chuyển:</h5>
+              <ul>
+                <li>Xe buýt: Các tuyến 5, 7, 11 đều dừng gần công viên</li>
+                <li>Taxi/Grab: Dễ dàng đón tại công viên</li>
+                <li>Xe máy/Ô tô: Có bãi đỗ xe rộng rãi</li>
+              </ul>
+            </div>
+            <div class="col-md-6">
+              <div class="map-container" style="height: 400px; border-radius: var(--card-border-radius); overflow: hidden; border: 1px solid var(--bronze-light);">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3834.6266443840233!2d108.20743937580675!3d16.03290773899361!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3142199b507f30a9%3A0xc3e7fdde59c7247c!2zQ8O0bmcgdmnDqm4gVGhhbmggTmnDqm4!5e0!3m2!1svi!2s!4v1710864000000!5m2!1svi!2s" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+              </div>
+              
+              <div class="mt-4 p-3" style="background: linear-gradient(145deg, rgba(205, 127, 50, 0.3), rgba(205, 127, 50, 0.1)); border: 1px solid var(--bronze-light); border-radius: var(--card-border-radius);">
+                <h5 style="color: var(--gold-color); font-family: 'Charm', cursive;">Lưu ý:</h5>
+                <ul class="mb-0">
+                  <li>Giữ gìn vệ sinh chung và tuân thủ nội quy công viên</li>
+                  <li>Không mang vật dụng nguy hiểm, chất cấm vào khu vực sự kiện</li>
+                  <li>Đảm bảo an toàn phòng cháy chữa cháy</li>
+                  <li>Các đội sẽ được phân khu vực cụ thể khi check-in</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Preparation Guide -->
+<section class="about-section" id="preparation">
+  <div class="container">
+    <div class="section-title-decoration">
+      <div class="title-line"></div>
+      <div class="title-decoration"></div>
+      <div class="title-line"></div>
+    </div>
+    <h2 class="section-title" data-aos="fade-up">Hướng Dẫn Chuẩn Bị</h2>
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="about-card" data-aos="fade-up">
+          <div class="row">
+            <div class="col-md-6 mb-4">
+              <div class="card h-100" style="background: linear-gradient(145deg, rgba(205, 127, 50, 0.3), rgba(205, 127, 50, 0.1)); border: 1px solid var(--bronze-light); border-radius: var(--card-border-radius);">
+                <div class="card-body">
+                  <div class="d-flex align-items-center mb-3">
+                    <div style="width: 50px; height: 50px; background-color: rgba(212, 175, 55, 0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px;">
+                      <i class="fas fa-campground" style="font-size: 24px; color: var(--gold-color);"></i>
+                    </div>
+                    <h5 class="card-title mb-0" style="color: var(--gold-color); font-family: 'Dancing Script', cursive; font-size: 1.5rem;">Chuẩn Bị Lều Trại</h5>
+                  </div>
+                  <ul style="color: var(--text-color);">
+                    <li>Nghiên cứu kỹ về làng nghề truyền thống bạn chọn</li>
+                    <li>Chuẩn bị vật dụng trang trí phù hợp với chủ đề</li>
+                    <li>Mang theo các sản phẩm thủ công, dụng cụ làm nghề</li>
+                    <li>Chuẩn bị hình ảnh, tư liệu về làng nghề</li>
+                    <li>Lên kế hoạch bố trí không gian gian hàng 5m x 4m</li>
+                    <li>Chuẩn bị bài thuyết trình ngắn gọn về làng nghề</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-md-6 mb-4">
+              <div class="card h-100" style="background: linear-gradient(145deg, rgba(205, 127, 50, 0.3), rgba(205, 127, 50, 0.1)); border: 1px solid var(--bronze-light); border-radius: var(--card-border-radius);">
+                <div class="card-body">
+                  <div class="d-flex align-items-center mb-3">
+                    <div style="width: 50px; height: 50px; background-color: rgba(212, 175, 55, 0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px;">
+                      <i class="fas fa-music" style="font-size: 24px; color: var(--gold-color);"></i>
+                    </div>
+                    <h5 class="card-title mb-0" style="color: var(--gold-color); font-family: 'Dancing Script', cursive; font-size: 1.5rem;">Chuẩn Bị Dân Vũ</h5>
+                  </div>
+                  <ul style="color: var(--text-color);">
+                    <li>Chọn chủ đề phụ phù hợp (Văn hóa-Lịch sử/Văn học/Dân gian)</li>
+                    <li>Lên ý tưởng kết hợp giữa xu hướng GenZ và văn hóa Việt Nam</li>
+                    <li>Chuẩn bị trang phục phù hợp với chủ đề</li>
+                    <li>Tập luyện đội hình ít nhất 15 thành viên</li>
+                    <li>Chuẩn bị nhạc nền (gửi về BTC trước 10/04/2025)</li>
+                    <li>Thời lượng biểu diễn từ 5-7 phút</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-md-6 mb-4">
+              <div class="card h-100" style="background: linear-gradient(145deg, rgba(205, 127, 50, 0.3), rgba(205, 127, 50, 0.1)); border: 1px solid var(--bronze-light); border-radius: var(--card-border-radius);">
+                <div class="card-body">
+                  <div class="d-flex align-items-center mb-3">
+                    <div style="width: 50px; height: 50px; background-color: rgba(212, 175, 55, 0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px;">
+                      <i class="fas fa-tshirt" style="font-size: 24px; color: var(--gold-color);"></i>
+                    </div>
+                    <h5 class="card-title mb-0" style="color: var(--gold-color); font-family: 'Dancing Script', cursive; font-size: 1.5rem;">Chuẩn Bị Trang Phục</h5>
+                  </div>
+                  <ul style="color: var(--text-color);">
+                    <li>Nghiên cứu về văn học Việt Nam để chọn chủ đề</li>
+                    <li>Thiết kế trang phục thể hiện "Bản sắc hồn Việt"</li>
+                    <li>Chuẩn bị 2 bộ trang phục (1 nam, 1 nữ)</li>
+                    <li>Soạn bài thuyết trình về ý nghĩa trang phục</li>
+                    <li>Chuẩn bị nhạc nền trình diễn (1 phút 30 giây)</li>
+                    <li>Tập luyện kỹ năng trình diễn thời trang</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-md-6 mb-4">
+              <div class="card h-100" style="background: linear-gradient(145deg, rgba(205, 127, 50, 0.3), rgba(205, 127, 50, 0.1)); border: 1px solid var(--bronze-light); border-radius: var(--card-border-radius);">
+                <div class="card-body">
+                  <div class="d-flex align-items-center mb-3">
+                    <div style="width: 50px; height: 50px; background-color: rgba(212, 175, 55, 0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px;">
+                      <i class="fas fa-users" style="font-size: 24px; color: var(--gold-color);"></i>
+                    </div>
+                    <h5 class="card-title mb-0" style="color: var(--gold-color); font-family: 'Dancing Script', cursive; font-size: 1.5rem;">Chuẩn Bị Chung</h5>
+                  </div>
+                  <ul style="color: var(--text-color);">
+                    <li>Đồ dùng cá nhân: nước uống, đồ ăn nhẹ, áo mưa</li>
+                    <li>Vật dụng y tế: thuốc cá nhân, băng cá nhân, kem chống nắng</li>
+                    <li>Trang phục: áo đồng phục đội, giày thể thao</li>
+                    <li>Đồ dùng sinh hoạt: khăn, dép, đồ vệ sinh cá nhân</li>
+                    <li>Tinh thần đồng đội và sự sáng tạo</li>
+                    <li>Sạc dự phòng, máy ảnh (nếu cần)</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="mt-4 p-4" style="background: linear-gradient(145deg, rgba(212, 175, 55, 0.2), rgba(212, 175, 55, 0.1)); border: 1px solid var(--gold-color); border-radius: var(--card-border-radius);">
+  <h5 class="text-center mb-3" style="color: var(--gold-color); font-family: 'Dancing Script', cursive; font-size: 1.8rem;">Lịch Trình Chuẩn Bị</h5>
+  <ul style="color: var(--text-color); list-style-type: none; padding-left: 0;">
+    <li class="mb-3">
+      <div class="d-flex">
+        <div style="min-width: 150px; font-weight: bold;">07/03 - 21/03/2025:</div>
+        <div>Đăng ký tham gia, thành lập đội</div>
+      </div>
+    </li>
+    <li class="mb-3">
+      <div class="d-flex">
+        <div style="min-width: 150px; font-weight: bold;">22/03 - 31/03/2025:</div>
+        <div>Lên ý tưởng, phân công nhiệm vụ</div>
+      </div>
+    </li>
+    <li class="mb-3">
+      <div class="d-flex">
+        <div style="min-width: 150px; font-weight: bold;">01/04 - 10/04/2025:</div>
+        <div>Chuẩn bị trang phục, luyện tập dân vũ, gửi nhạc nền</div>
+      </div>
+    </li>
+    <li class="mb-3">
+      <div class="d-flex">
+        <div style="min-width: 150px; font-weight: bold;">13/04/2025:</div>
+        <div>Tham gia Training Camp</div>
+      </div>
+    </li>
+    <li class="mb-3">
+      <div class="d-flex">
+        <div style="min-width: 150px; font-weight: bold;">14/04 - 17/04/2025:</div>
+        <div>Hoàn thiện các phần thi, chuẩn bị vật dụng</div>
+      </div>
+    </li>
+  </ul>
+</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
   <!-- Registration Form -->
   <section class="registration-section" id="register">
@@ -481,9 +2369,9 @@
           <div class="footer-links">
             <h4>Liên hệ</h4>
             <ul>
-              <li><i class="fas fa-map-marker-alt me-2"></i> Toà G, 120 Hoàng Minh ThảoHoà Khánh Nam, Liên Chiểu, Đà Nẵng</li>
-              <li><i class="fas fa-phone me-2"></i> 0123 456 789</li>
-              <li><i class="fas fa-envelope me-2"></i> doanviendtqt.dtu@gmail.com</li>
+              <li><i class="fas fa-map-marker-alt me-2"></i> Đại học Quốc Tế, Khu phố 6, Linh Trung, Thủ Đức, TP.HCM</li>
+              <li><i class="fas fa-phone me-2"></i> (028) 3724 4270</li>
+              <li><i class="fas fa-envelope me-2"></i> doantruong@hcmiu.edu.vn</li>
             </ul>
           </div>
         </div>
@@ -503,9 +2391,251 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <!-- AOS Animation Library -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <script>
+    // Initialize AOS
+    AOS.init({
+      duration: 800,
+      easing: 'ease-in-out',
+      once: true
+    });
+
+    // Navbar Scroll Effect
+    window.addEventListener('scroll', function() {
+      const navbar = document.querySelector('.navbar');
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+
+      // Back to Top Button
+      const backToTop = document.getElementById('backToTop');
+      if (window.scrollY > 300) {
+        backToTop.classList.add('active');
+      } else {
+        backToTop.classList.remove('active');
+      }
+    });
+
+    // Smooth Scrolling
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          window.scrollTo({
+            top: target.offsetTop - 70,
+            behavior: 'smooth'
+          });
+
+          // Close mobile menu if open
+          const navbarCollapse = document.querySelector('.navbar-collapse');
+          if (navbarCollapse.classList.contains('show')) {
+            navbarCollapse.classList.remove('show');
+          }
+        }
+      });
+    });
+
+    // Active Navigation Link
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        if (window.scrollY >= (sectionTop - 100)) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${current}`) {
+          link.classList.add('active');
+        }
+      });
+    });
+
+    // Countdown Timer
+    function updateCountdown() {
+      const targetDate = new Date('2025-04-18T00:00:00').getTime();
+
+      const timer = setInterval(() => {
+        const now = new Date().getTime();
+        const distance = targetDate - now;
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.getElementById('days').textContent = String(days).padStart(2, '0');
+        document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+        document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+        document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+
+        if (distance < 0) {
+          clearInterval(timer);
+          document.getElementById('days').textContent = '00';
+          document.getElementById('hours').textContent = '00';
+          document.getElementById('minutes').textContent = '00';
+          document.getElementById('seconds').textContent = '00';
+        }
+      }, 1000);
+    }
+
+    // Initialize countdown
+    updateCountdown();
+
+    // Form Submission
+    document.getElementById('registrationForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      // Simple form validation
+      const teamName = document.getElementById('teamName').value;
+      const leaderName = document.getElementById('leaderName').value;
+      const email = document.getElementById('email').value;
+      const phone = document.getElementById('phone').value;
+      const memberCount = document.getElementById('memberCount').value;
+
+      if (!teamName || !leaderName || !email || !phone || memberCount === 'Chọn số lượng thành viên') {
+        alert('Vui lòng điền đầy đủ thông tin!');
+        return;
+      }
+
+      // Here you would typically send the form data to a server
+      // For demo purposes, we'll just show a success message
+      alert('Đăng ký thành công! Chúng tôi sẽ liên hệ với bạn sớm nhất.');
+      this.reset();
+    });
+
+    // Hover Effects for Cards
+    const featureCards = document.querySelectorAll('.feature-card');
+    featureCards.forEach(card => {
+      card.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateY(-10px)';
+        this.style.boxShadow = '0 15px 30px rgba(0, 0, 0, 0.2)';
+      });
+
+      card.addEventListener('mouseleave', function() {
+        this.style.transform = '';
+        this.style.boxShadow = '';
+      });
+    });
+
+    // Parallax Effect for Hero Section
+    window.addEventListener('scroll', function() {
+      const scrollPosition = window.scrollY;
+      const heroContent = document.querySelector('.hero-content');
+
+      if (heroContent) {
+        heroContent.style.transform = `translateY(${scrollPosition * 0.1}px)`;
+      }
+    });
+
+    // Image Lazy Loading
+    document.addEventListener("DOMContentLoaded", function() {
+      const lazyImages = document.querySelectorAll('img');
+
+      if ('IntersectionObserver' in window) {
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const image = entry.target;
+              image.src = image.src; // This triggers the image load
+              imageObserver.unobserve(image);
+            }
+          });
+        });
+
+        lazyImages.forEach(img => {
+          imageObserver.observe(img);
+        });
+      }
+    });
+
+    // Animated Counter for Statistics (can be added to the page)
+    function animateCounter(element, target, duration) {
+      let start = 0;
+      const increment = target / (duration / 16);
+
+      const timer = setInterval(() => {
+        start += increment;
+        element.textContent = Math.floor(start);
+
+        if (start >= target) {
+          clearInterval(timer);
+          element.textContent = target;
+        }
+      }, 16);
+    }
+
+    // Preloader (can be added to the page)
+    window.addEventListener('load', function() {
+      const preloader = document.querySelector('.preloader');
+      if (preloader) {
+        preloader.style.opacity = '0';
+        setTimeout(() => {
+          preloader.style.display = 'none';
+        }, 500);
+      }
+    });
+
+// Add this to the JavaScript section to enhance navbar functionality
+// Enhanced Navbar Functionality
+document.addEventListener('DOMContentLoaded', function() {
+  // Dropdown hover effect for desktop
+  if (window.innerWidth > 992) {
+    document.querySelectorAll('.navbar .dropdown').forEach(function(dropdown) {
+      dropdown.addEventListener('mouseenter', function() {
+        this.querySelector('.dropdown-toggle').click();
+      });
+      
+      dropdown.addEventListener('mouseleave', function() {
+        this.querySelector('.dropdown-toggle').click();
+      });
+    });
+  }
   
-  <script src="scripts.js">
-   
+  // Close navbar collapse on link click in mobile view
+  document.querySelectorAll('.navbar-nav .nav-link').forEach(function(link) {
+    link.addEventListener('click', function() {
+      if (window.innerWidth < 992) {
+        const navbarCollapse = document.querySelector('.navbar-collapse');
+        if (navbarCollapse.classList.contains('show')) {
+          const bsCollapse = new bootstrap.Collapse(navbarCollapse);
+          bsCollapse.hide();
+        }
+      }
+    });
+  });
+  
+  // Add scroll indicator
+  const scrollIndicator = document.createElement('div');
+  scrollIndicator.className = 'scroll-indicator';
+  scrollIndicator.style.cssText = `
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background-color: var(--gold-color);
+    z-index: 1031;
+    width: 0%;
+    transition: width 0.2s ease-out;
+  `;
+  document.body.appendChild(scrollIndicator);
+  
+  window.addEventListener('scroll', function() {
+    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrolled = (winScroll / height) * 100;
+    scrollIndicator.style.width = scrolled + '%';
+  });
+});
   </script>
 </body>
 </html>
