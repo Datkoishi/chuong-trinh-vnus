@@ -95,29 +95,102 @@
 
   // Initialize countdown
   updateCountdown();
+// Handle dynamic team member fields
+document.getElementById('memberCount').addEventListener('change', function() {
+  const memberCount = parseInt(this.value);
+  const container = document.getElementById('teamMembersContainer');
+  
+  // Clear previous member fields
+  container.innerHTML = '';
+  
+  if (isNaN(memberCount) || memberCount <= 0) return;
+  
+  // Add section header
+  const header = document.createElement('div');
+  header.className = 'mt-4 mb-3';
+  header.innerHTML = `
+    <h4 style="color: var(--gold-color); font-family: 'Dancing Script', cursive; font-size: 1.8rem;">
+      Thông tin thành viên
+    </h4>
+    <p>Vui lòng điền thông tin cho tất cả ${memberCount} thành viên</p>
+  `;
+  container.appendChild(header);
+  
+  // Generate member fields
+  for (let i = 0; i < memberCount; i++) {
+    const memberSection = document.createElement('div');
+    memberSection.className = 'member-section mb-4 p-3';
+    memberSection.style.background = 'linear-gradient(145deg, rgba(205, 127, 50, 0.2), rgba(205, 127, 50, 0.1))';
+    memberSection.style.borderRadius = 'var(--card-border-radius)';
+    memberSection.style.border = '1px solid var(--bronze-light)';
+    
+    memberSection.innerHTML = `
+      <h5 style="color: var(--gold-color); font-family: 'Charm', cursive;">
+        ${i === 0 ? 'Đội trưởng' : `Thành viên ${i + 1}`}
+      </h5>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="mb-3">
+            <label for="member${i}Name" class="form-label">Họ và tên <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="member${i}Name" name="member${i}Name" required>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="mb-3">
+            <label for="member${i}Class" class="form-label">Lớp <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="member${i}Class" name="member${i}Class" required>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="mb-3">
+            <label for="member${i}StudentId" class="form-label">Mã sinh viên <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="member${i}StudentId" name="member${i}StudentId" required>
+          </div>
+        </div>
+      </div>
+    `;
+    
+    container.appendChild(memberSection);
+  }
+});
 
-  // Form Submission
-  document.getElementById('registrationForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    // Simple form validation
-    const teamName = document.getElementById('teamName').value;
-    const leaderName = document.getElementById('leaderName').value;
-    const email = document.getElementById('email').value;
-    const phone = document.getElementById('phone').value;
-    const memberCount = document.getElementById('memberCount').value;
-    
-    if (!teamName || !leaderName || !email || !phone || memberCount === 'Chọn số lượng thành viên') {
-      alert('Vui lòng điền đầy đủ thông tin!');
-      return;
+// Update form submission to validate member fields
+document.getElementById('registrationForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  
+  // Simple form validation
+  const teamName = document.getElementById('teamName').value;
+  const leaderName = document.getElementById('leaderName').value;
+  const email = document.getElementById('email').value;
+  const phone = document.getElementById('phone').value;
+  const memberCount = document.getElementById('memberCount').value;
+  
+  if (!teamName || !leaderName || !email || !phone || memberCount === 'Chọn số lượng thành viên') {
+    alert('Vui lòng điền đầy đủ thông tin cơ bản của đội!');
+    return;
+  }
+  
+  // Validate member fields
+  const count = parseInt(memberCount);
+  if (!isNaN(count)) {
+    for (let i = 0; i < count; i++) {
+      const nameField = document.getElementById(`member${i}Name`);
+      const classField = document.getElementById(`member${i}Class`);
+      const studentIdField = document.getElementById(`member${i}StudentId`);
+      
+      if (!nameField || !nameField.value || !classField || !classField.value || !studentIdField || !studentIdField.value) {
+        alert(`Vui lòng điền đầy đủ thông tin bắt buộc cho ${i === 0 ? 'đội trưởng' : 'thành viên ' + (i + 1)}!`);
+        return;
+      }
     }
-    
-    // Here you would typically send the form data to a server
-    // For demo purposes, we'll just show a success message
-    alert('Đăng ký thành công! Chúng tôi sẽ liên hệ với bạn sớm nhất.');
-    this.reset();
-  });
-
+  }
+  
+  // Here you would typically send the form data to a server
+  // For demo purposes, we'll just show a success message
+  alert('Đăng ký thành công! Chúng tôi sẽ liên hệ với bạn sớm nhất.');
+  this.reset();
+  document.getElementById('teamMembersContainer').innerHTML = '';
+});
   // Hover Effects for Cards
   const featureCards = document.querySelectorAll('.feature-card');
   featureCards.forEach(card => {

@@ -2226,74 +2226,479 @@
   </div>
 </section>
 
-  <!-- Registration Form -->
-  <section class="registration-section" id="register">
-    <div class="container">
-      <div class="section-title-decoration">
-        <div class="title-line"></div>
-        <div class="title-decoration"></div>
-        <div class="title-line"></div>
-      </div>
-      <h2 class="section-title" data-aos="fade-up">Đăng Ký Tham Gia</h2>
-      <div class="row justify-content-center">
-        <div class="col-lg-8">
-          <div class="form-card" data-aos="fade-up">
-            <form id="registrationForm">
+<!-- Registration Form -->
+<section class="registration-section" id="register">
+  <div class="container">
+    <div class="section-title-decoration">
+      <div class="title-line"></div>
+      <div class="title-decoration"></div>
+      <div class="title-line"></div>
+    </div>
+    <h2 class="section-title" data-aos="fade-up">Đăng Ký Tham Gia</h2>
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="form-card" data-aos="fade-up">
+          <form id="registrationForm">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="teamName" class="form-label">Tên đội</label>
+                  <input type="text" class="form-control" id="teamName" placeholder="Nhập tên đội của bạn">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="leaderName" class="form-label">Tên đội trưởng</label>
+                  <input type="text" class="form-control" id="leaderName" placeholder="Nhập tên đội trưởng">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="email" class="form-label">Email liên hệ</label>
+                  <input type="email" class="form-control" id="email" placeholder="Nhập email liên hệ">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="phone" class="form-label">Số điện thoại</label>
+                  <input type="tel" class="form-control" id="phone" placeholder="Nhập số điện thoại">
+                </div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="memberCount" class="form-label">Số lượng thành viên</label>
+              <select class="form-select" id="memberCount">
+                <option selected>Chọn số lượng thành viên</option>
+                <option value="5">5 thành viên</option>
+                <option value="10">10 thành viên</option>
+                <option value="15">15 thành viên</option>
+                <option value="20">20 thành viên</option>
+                <option value="25">25 thành viên</option>
+                <option value="30">30 thành viên</option>
+                <option value="35">35 thành viên</option>
+                <option value="36">36 thành viên</option>
+                <option value="37">37 thành viên</option>
+                <option value="38">38 thành viên</option>
+                <option value="39">39 thành viên</option>
+                <option value="40">40 thành viên</option>
+                <option value="41">41 thành viên</option>
+                <option value="42">42 thành viên</option>
+                <option value="43">43 thành viên</option>
+                <option value="44">44 thành viên</option>
+                <option value="45">45 thành viên</option>
+                <option value="46">46 thành viên</option>
+                <option value="47">47 thành viên</option>
+                <option value="48">48 thành viên</option>
+                <option value="49">49 thành viên</option>
+                <option value="50">50 thành viên</option>
+              </select>
+            </div>
+            
+            <!-- Fee calculation section -->
+            <div id="feeCalculation" class="mb-4 p-3" style="background: linear-gradient(145deg, rgba(212, 175, 55, 0.2), rgba(212, 175, 55, 0.1)); border-radius: var(--card-border-radius); border: 1px solid var(--gold-color); display: none;">
+              <h4 style="color: var(--gold-color); font-family: 'Dancing Script', cursive; font-size: 1.8rem; text-align: center;">
+                Thông tin lệ phí
+              </h4>
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <p><strong>Lệ phí:</strong> 180.000 VNĐ / người</p>
+                </div>
+                <div class="col-md-6">
+                  <p><strong>Số thành viên:</strong> <span id="memberCountDisplay">0</span> người</p>
+                </div>
+              </div>
+              <div class="text-center mb-3">
+                <h5 style="color: var(--red-traditional); font-family: 'Charm', cursive; font-size: 1.5rem;">
+                  Tổng lệ phí: <span id="totalFee">0</span> VNĐ
+                </h5>
+              </div>
               <div class="row">
                 <div class="col-md-6">
-                  <div class="mb-3">
-                    <label for="teamName" class="form-label">Tên đội</label>
-                    <input type="text" class="form-control" id="teamName" placeholder="Nhập tên đội của bạn">
+                  <div class="payment-info p-3" style="background: rgba(255, 255, 255, 0.1); border-radius: var(--card-border-radius);">
+                    <h5 style="color: var(--gold-color); font-family: 'Charm', cursive;">Thông tin chuyển khoản</h5>
+                    <p><strong>Tên tài khoản:</strong> TRUONG THI LY NA</p>
+                    <p><strong>Số tài khoản:</strong> 9992408049999</p>
+                    <p><strong>Ngân hàng:</strong> Ngân hàng TMCP Á Châu (ACB)</p>
+                    <p><strong>Nội dung chuyển khoản:</strong> <span id="transferContent">HTTT [Tên đội]</span></p>
                   </div>
                 </div>
-                <div class="col-md-6">
-                  <div class="mb-3">
-                    <label for="leaderName" class="form-label">Tên đội trưởng</label>
-                    <input type="text" class="form-control" id="leaderName" placeholder="Nhập tên đội trưởng">
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="mb-3">
-                    <label for="email" class="form-label">Email liên hệ</label>
-                    <input type="email" class="form-control" id="email" placeholder="Nhập email liên hệ">
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="mb-3">
-                    <label for="phone" class="form-label">Số điện thoại</label>
-                    <input type="tel" class="form-control" id="phone" placeholder="Nhập số điện thoại">
+                <div class="col-md-6 text-center">
+                  <div class="qr-code-container">
+                    <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/A%CC%89nh%20ma%CC%80n%20hi%CC%80nh%202025-04-01%20lu%CC%81c%2021.47.13-cjbze5SFiIkyakxYh0CJfrdwGia8FO.png" alt="QR Code thanh toán" class="img-fluid" style="max-width: 200px; border-radius: 10px; border: 1px solid var(--bronze-light);">
+                    <p class="mt-2" style="font-size: 0.9rem;">Quét mã QR để thanh toán</p>
                   </div>
                 </div>
               </div>
-              <div class="mb-3">
-                <label for="memberCount" class="form-label">Số lượng thành viên</label>
-                <select class="form-select" id="memberCount">
-                  <option selected>Chọn số lượng thành viên</option>
-                  <option value="5">5 thành viên</option>
-                  <option value="6">6 thành viên</option>
-                  <option value="7">7 thành viên</option>
-                  <option value="8">8 thành viên</option>
-                  <option value="9">9 thành viên</option>
-                  <option value="10">10 thành viên</option>
-                </select>
+              
+              <!-- Payment Receipt Upload -->
+              <div class="mt-4">
+                <h5 style="color: var(--gold-color); font-family: 'Charm', cursive;">Nộp biên lai chuyển khoản</h5>
+                <p class="mb-3">Vui lòng tải lên hình ảnh biên lai chuyển khoản để xác nhận thanh toán</p>
+                
+                <div class="mb-3">
+                  <label for="paymentReceipt" class="form-label">Hình ảnh biên lai <span class="text-danger">*</span></label>
+                  <input class="form-control" type="file" id="paymentReceipt" accept="image/*" required>
+                  <div class="form-text">Chấp nhận các định dạng: JPG, PNG, JPEG</div>
+                </div>
+                
+                <div id="receiptPreviewContainer" class="text-center mt-3" style="display: none;">
+                  <h6 style="color: var(--gold-color); font-family: 'Charm', cursive;">Xem trước biên lai</h6>
+                  <img id="receiptPreview" src="#" alt="Xem trước biên lai" class="img-fluid mt-2" style="max-height: 200px; border-radius: var(--card-border-radius); border: 1px solid var(--bronze-light);">
+                </div>
+                
+                <div id="uploadStatus" class="mt-3" style="display: none;">
+                  <div class="progress">
+                    <div id="uploadProgressBar" class="progress-bar bg-success" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+                  </div>
+                  <p id="uploadMessage" class="mt-2 text-center"></p>
+                </div>
               </div>
-              <div class="mb-3">
-                <label for="message" class="form-label">Thông tin thêm</label>
-                <textarea class="form-control" id="message" rows="4" placeholder="Nhập thông tin thêm về đội của bạn"></textarea>
+            </div>
+            
+            <!-- Container for dynamic member fields -->
+            <div id="teamMembersContainer" class="mb-4">
+              <!-- Dynamic member fields will be added here -->
+            </div>
+            
+            <div class="mb-3">
+              <label for="message" class="form-label">Thông tin thêm</label>
+              <textarea class="form-control" id="message" rows="4" placeholder="Nhập thông tin thêm về đội của bạn"></textarea>
+            </div>
+            
+            <!-- Hidden field to store the uploaded image URL -->
+            <input type="hidden" id="receiptImageUrl" name="receiptImageUrl">
+            
+            <div class="text-center">
+              <button type="submit" class="btn-custom btn-primary-custom" id="submitButton">
+                <i class="fas fa-paper-plane me-2"></i>Gửi đăng ký
+              </button>
+              <div id="submissionStatus" class="mt-3" style="display: none;">
+                <div class="spinner-border text-light" role="status">
+                  <span class="visually-hidden">Đang gửi...</span>
+                </div>
+                <p id="submissionMessage" class="mt-2"></p>
               </div>
-              <div class="text-center">
-                <button type="submit" class="btn-custom btn-primary-custom">
-                  <i class="fas fa-paper-plane me-2"></i>Gửi đăng ký
-                </button>
-              </div>
-            </form>
-          </div>
+            </div>
+          </form>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
+
+<!-- Add this to your JavaScript section -->
+<script>
+// ImgBB API configuration
+const IMGBB_API_KEY = '069cd353e3b761bf7f4930607e1c1674';
+const IMGBB_UPLOAD_URL = 'https://api.imgbb.com/1/upload';
+
+// Google Form URL - Replace with your actual Google Form URL
+const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/YOUR_FORM_ID/formResponse';
+
+// Handle dynamic team member fields and fee calculation
+document.getElementById('memberCount').addEventListener('change', function() {
+  const memberCount = parseInt(this.value);
+  const container = document.getElementById('teamMembersContainer');
+  const feeCalculation = document.getElementById('feeCalculation');
+  
+  // Clear previous member fields
+  container.innerHTML = '';
+  
+  if (isNaN(memberCount) || memberCount <= 0) {
+    feeCalculation.style.display = 'none';
+    return;
+  }
+  
+  // Update fee calculation
+  const feePerPerson = 180000; // 180,000 VND per person
+  const totalFee = memberCount * feePerPerson;
+  
+  document.getElementById('memberCountDisplay').textContent = memberCount;
+  document.getElementById('totalFee').textContent = totalFee.toLocaleString('vi-VN');
+  feeCalculation.style.display = 'block';
+  
+  // Update transfer content
+  const teamName = document.getElementById('teamName').value || '[Tên đội]';
+  document.getElementById('transferContent').textContent = `HTTT ${teamName}`;
+  
+  // Add section header
+  const header = document.createElement('div');
+  header.className = 'mt-4 mb-3';
+  header.innerHTML = `
+    <h4 style="color: var(--gold-color); font-family: 'Dancing Script', cursive; font-size: 1.8rem;">
+      Thông tin thành viên
+    </h4>
+    <p>Vui lòng điền thông tin cho tất cả ${memberCount} thành viên</p>
+  `;
+  container.appendChild(header);
+  
+  // Generate member fields
+  for (let i = 0; i < memberCount; i++) {
+    const memberSection = document.createElement('div');
+    memberSection.className = 'member-section mb-4 p-3';
+    memberSection.style.background = 'linear-gradient(145deg, rgba(205, 127, 50, 0.2), rgba(205, 127, 50, 0.1))';
+    memberSection.style.borderRadius = 'var(--card-border-radius)';
+    memberSection.style.border = '1px solid var(--bronze-light)';
+    
+    memberSection.innerHTML = `
+      <h5 style="color: var(--gold-color); font-family: 'Charm', cursive;">
+        ${i === 0 ? 'Đội trưởng' : `Thành viên ${i + 1}`}
+      </h5>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="mb-3">
+            <label for="member${i}Name" class="form-label">Họ và tên <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="member${i}Name" name="member${i}Name" required>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="mb-3">
+            <label for="member${i}Class" class="form-label">Lớp <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="member${i}Class" name="member${i}Class" required>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="mb-3">
+            <label for="member${i}StudentId" class="form-label">Mã sinh viên <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="member${i}StudentId" name="member${i}StudentId" required>
+          </div>
+        </div>
+      </div>
+    `;
+    
+    container.appendChild(memberSection);
+  }
+});
+
+// Update transfer content when team name changes
+document.getElementById('teamName').addEventListener('input', function() {
+  const teamName = this.value || '[Tên đội]';
+  document.getElementById('transferContent').textContent = `HTTT ${teamName}`;
+});
+
+// Handle payment receipt preview
+document.getElementById('paymentReceipt').addEventListener('change', function(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  
+  // Check file type
+  const fileType = file.type;
+  if (!fileType.match('image.*')) {
+    alert('Vui lòng chọn file hình ảnh (JPG, PNG, JPEG)');
+    this.value = '';
+    return;
+  }
+  
+  // Check file size (max 5MB)
+  if (file.size > 5 * 1024 * 1024) {
+    alert('Kích thước file quá lớn. Vui lòng chọn file nhỏ hơn 5MB');
+    this.value = '';
+    return;
+  }
+  
+  // Show preview
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const preview = document.getElementById('receiptPreview');
+    preview.src = e.target.result;
+    document.getElementById('receiptPreviewContainer').style.display = 'block';
+  }
+  reader.readAsDataURL(file);
+});
+
+// Function to upload image to ImgBB
+async function uploadImageToImgBB(file) {
+  const formData = new FormData();
+  formData.append('image', file);
+  formData.append('key', IMGBB_API_KEY);
+  
+  const uploadStatus = document.getElementById('uploadStatus');
+  const progressBar = document.getElementById('uploadProgressBar');
+  const uploadMessage = document.getElementById('uploadMessage');
+  
+  uploadStatus.style.display = 'block';
+  uploadMessage.textContent = 'Đang tải lên biên lai...';
+  
+  try {
+    // Simulate progress (since fetch doesn't provide upload progress)
+    let progress = 0;
+    const progressInterval = setInterval(() => {
+      progress += 5;
+      if (progress > 90) clearInterval(progressInterval);
+      progressBar.style.width = `${progress}%`;
+      progressBar.textContent = `${progress}%`;
+      progressBar.setAttribute('aria-valuenow', progress);
+    }, 200);
+    
+    const response = await fetch(IMGBB_UPLOAD_URL, {
+      method: 'POST',
+      body: formData
+    });
+    
+    clearInterval(progressInterval);
+    
+    if (!response.ok) {
+      throw new Error('Lỗi khi tải lên biên lai');
+    }
+    
+    const data = await response.json();
+    
+    // Complete progress bar
+    progressBar.style.width = '100%';
+    progressBar.textContent = '100%';
+    progressBar.setAttribute('aria-valuenow', 100);
+    uploadMessage.textContent = 'Tải lên biên lai thành công!';
+    
+    return data.data.url;
+  } catch (error) {
+    uploadMessage.textContent = `Lỗi: ${error.message}`;
+    progressBar.classList.remove('bg-success');
+    progressBar.classList.add('bg-danger');
+    throw error;
+  }
+}
+
+// Function to prepare form data for Google Form submission
+function prepareFormData() {
+  const teamName = document.getElementById('teamName').value;
+  const leaderName = document.getElementById('leaderName').value;
+  const email = document.getElementById('email').value;
+  const phone = document.getElementById('phone').value;
+  const memberCount = parseInt(document.getElementById('memberCount').value);
+  const message = document.getElementById('message').value;
+  const receiptImageUrl = document.getElementById('receiptImageUrl').value;
+  
+  // Prepare member data
+  const memberData = [];
+  for (let i = 0; i < memberCount; i++) {
+    const memberName = document.getElementById(`member${i}Name`).value;
+    const memberClass = document.getElementById(`member${i}Class`).value;
+    const memberStudentId = document.getElementById(`member${i}StudentId`).value;
+    
+    memberData.push({
+      name: memberName,
+      class: memberClass,
+      studentId: memberStudentId,
+      isLeader: i === 0
+    });
+  }
+  
+  // Calculate total fee
+  const feePerPerson = 180000;
+  const totalFee = memberCount * feePerPerson;
+  
+  return {
+    teamName,
+    leaderName,
+    email,
+    phone,
+    memberCount,
+    totalFee,
+    message,
+    receiptImageUrl,
+    memberData,
+    submissionDate: new Date().toISOString()
+  };
+}
+
+// Function to submit data to Google Form
+async function submitToGoogleForm(formData) {
+  // This is a placeholder function - you'll need to map your form data to the actual Google Form fields
+  // Example: const googleFormData = new FormData();
+  // googleFormData.append('entry.123456789', formData.teamName);
+  
+  // For demonstration purposes, we'll just simulate a successful submission
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve({ success: true });
+    }, 2000);
+  });
+}
+
+// Handle form submission
+document.getElementById('registrationForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  
+  // Simple form validation
+  const teamName = document.getElementById('teamName').value;
+  const leaderName = document.getElementById('leaderName').value;
+  const email = document.getElementById('email').value;
+  const phone = document.getElementById('phone').value;
+  const memberCount = document.getElementById('memberCount').value;
+  const paymentReceipt = document.getElementById('paymentReceipt').files[0];
+  
+  if (!teamName || !leaderName || !email || !phone || memberCount === 'Chọn số lượng thành viên') {
+    alert('Vui lòng điền đầy đủ thông tin cơ bản của đội!');
+    return;
+  }
+  
+  if (!paymentReceipt) {
+    alert('Vui lòng tải lên biên lai chuyển khoản!');
+    return;
+  }
+  
+  // Validate member fields
+  const count = parseInt(memberCount);
+  if (!isNaN(count)) {
+    for (let i = 0; i < count; i++) {
+      const nameField = document.getElementById(`member${i}Name`);
+      const classField = document.getElementById(`member${i}Class`);
+      const studentIdField = document.getElementById(`member${i}StudentId`);
+      
+      if (!nameField || !nameField.value || !classField || !classField.value || !studentIdField || !studentIdField.value) {
+        alert(`Vui lòng điền đầy đủ thông tin bắt buộc cho ${i === 0 ? 'đội trưởng' : 'thành viên ' + (i + 1)}!`);
+        return;
+      }
+    }
+  }
+  
+  // Disable submit button and show submission status
+  const submitButton = document.getElementById('submitButton');
+  const submissionStatus = document.getElementById('submissionStatus');
+  const submissionMessage = document.getElementById('submissionMessage');
+  
+  submitButton.disabled = true;
+  submissionStatus.style.display = 'block';
+  submissionMessage.textContent = 'Đang xử lý đăng ký...';
+  
+  try {
+    // Upload receipt image to ImgBB
+    const imageUrl = await uploadImageToImgBB(paymentReceipt);
+    document.getElementById('receiptImageUrl').value = imageUrl;
+    
+    // Prepare form data
+    const formData = prepareFormData();
+    
+    // Submit to Google Form
+    submissionMessage.textContent = 'Đang gửi thông tin đăng ký...';
+    const result = await submitToGoogleForm(formData);
+    
+    if (result.success) {
+      // Show success message
+      alert('Đăng ký thành công! Cảm ơn bạn đã đăng ký tham gia sự kiện.');
+      
+      // Reset form
+      this.reset();
+      document.getElementById('teamMembersContainer').innerHTML = '';
+      document.getElementById('feeCalculation').style.display = 'none';
+      document.getElementById('receiptPreviewContainer').style.display = 'none';
+      document.getElementById('uploadStatus').style.display = 'none';
+      document.getElementById('receiptImageUrl').value = '';
+    } else {
+      throw new Error('Có lỗi xảy ra khi gửi đăng ký');
+    }
+  } catch (error) {
+    alert(`Lỗi: ${error.message}. Vui lòng thử lại sau.`);
+    console.error('Submission error:', error);
+  } finally {
+    // Re-enable submit button and hide submission status
+    submitButton.disabled = false;
+    submissionStatus.style.display = 'none';
+  }
+});
+</script>
 
   <!-- Sponsors Section -->
   <section class="sponsors-section" id="sponsors">
@@ -2490,29 +2895,7 @@
 
     // Initialize countdown
     updateCountdown();
-
-    // Form Submission
-    document.getElementById('registrationForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-
-      // Simple form validation
-      const teamName = document.getElementById('teamName').value;
-      const leaderName = document.getElementById('leaderName').value;
-      const email = document.getElementById('email').value;
-      const phone = document.getElementById('phone').value;
-      const memberCount = document.getElementById('memberCount').value;
-
-      if (!teamName || !leaderName || !email || !phone || memberCount === 'Chọn số lượng thành viên') {
-        alert('Vui lòng điền đầy đủ thông tin!');
-        return;
-      }
-
-      // Here you would typically send the form data to a server
-      // For demo purposes, we'll just show a success message
-      alert('Đăng ký thành công! Chúng tôi sẽ liên hệ với bạn sớm nhất.');
-      this.reset();
-    });
-
+    
     // Hover Effects for Cards
     const featureCards = document.querySelectorAll('.feature-card');
     featureCards.forEach(card => {
